@@ -36,33 +36,53 @@
             </select>
             
             <label for="Organization">기관명:</label>
-            <textarea rows="1" cols="20" name="contents"></textarea><br>
+            <textarea rows="1" cols="20" name="Organization"></textarea><br>
             
             <label for="keyword">키워드:</label>
             <textarea rows="1" cols="20" name="contents"></textarea>
 
-            <label for="State">비용구분:</label>
-            <select id="State" name="State">
-                <option value="moneyTrue">필요함</option>
-                <option value="moneyFalse">필요없음</option>
+            <label for="expense">비용구분:</label>
+            <select id="expense" name="State">
+                <option value="expenseTrue">필요함</option>
+                <option value="expenseFalse">필요없음</option>
                 <!-- 기타 지역 옵션 추가 -->
             </select>
 
-            <label for="State">재산:</label>
-            <select id="State" name="State">
-                <option value="moneyTrue">필요함</option>
-                <option value="moneyFalse">필요없음</option>
+            <label for="money">재산:</label>
+            <select id="money" name="money">
+                <option value="moneyMillion">천만원이상</option>
+                <option value="moneyFalse">해당사항 없음</option>
+                <!-- 기타 지역 옵션 추가 -->
+            </select><br>
+
+            <label for="online">온라인 신청 여부:</label>
+            <select id="online" name="online">
+                <option value="onlineTrue">필요함</option>
+                <option value="onlineFalse">필요없음</option>
                 <!-- 기타 지역 옵션 추가 -->
             </select>
 
+            <label for="age">나이:</label>
+            <textarea rows="1" cols="4" name="age"></textarea>
+
+            <label for="gender">성별:</label>
+            <select id="gender" name="gender">
+                <option value="genderG">여성</option>
+                <option value="genderM">남성</option>
+                <!-- 기타 지역 옵션 추가 -->
+            </select>
+
+            <label for="other">기타:</label>
+            <select id="other" name="other">
+                <option value="veterans">보훈대상자</option>
+                <option value="Disabled">장애인</option>
+                <!-- 기타 지역 옵션 추가 -->
+            </select><br>
 
             <!-- 기타 입력 필드 추가 -->
             <button type="submit">신청</button>
             <button type="reset">초기화</button>
         </form>
     </main>
-    <footer>
-        <p>이용약관동의서</p>
-    </footer>
 </body>
 </html>
