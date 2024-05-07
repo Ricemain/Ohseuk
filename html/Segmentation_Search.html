@@ -2,15 +2,15 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>서비스 신청서</title>
+    <title>세분화 검색</title>
 </head>
 <body>
     <header>
         <nav>
             <ul>
-                <li><a href="#">홈</a></li>
-                <li><a href="#">서비스 가이드</a></li>
-                <li><a href="#">가격 문의</a></li>
+                <li><a href="#">복지혜택 검색</a></li>
+                <li><a href="#">커뮤니티 기능</a></li>
+                <li><a href="#">맞춤형 추천</a></li>
                 <li><a href="#">이벤트</a></li>
                 <li><a href="#">고객센터</a></li>
             </ul>
@@ -18,21 +18,44 @@
     </header>
     <main>
         <form action="#" method="post">
+            <p>복지혜택 검색 > 세분화 검색</p>
             <h1>서비스 신청서</h1>
-            <label for="region">지역:</label>
-            <select id="region" name="region">
+            <label for="State">지역:</label>
+            <select id="State" name="State">
                 <option value="seoul">서울</option>
                 <option value="busan">부산</option>
                 <option value="daegu">대구</option>
                 <!-- 기타 지역 옵션 추가 -->
             </select>
-            <label for="venue">장소:</label>
-            <select id="venue" name="venue">
-                <option value="wedding_hall">웨딩홀</option>
-                <option value="cinema">영화관</option>
-                <option value="golf_course">골프장</option>
+            <label for="City"></label>
+            <select id="City" name="City">
+                <option value="Songpa-gu">송파구</option>
+                <option value="Gangnam-gu">강남구</option>
+                <option value="Seocho-gu">서초구</option>
                 <!-- 기타 장소 옵션 추가 -->
             </select>
+            
+            <label for="Organization">기관명:</label>
+            <textarea rows="1" cols="20" name="contents"></textarea><br>
+            
+            <label for="keyword">키워드:</label>
+            <textarea rows="1" cols="20" name="contents"></textarea>
+
+            <label for="State">비용구분:</label>
+            <select id="State" name="State">
+                <option value="moneyTrue">필요함</option>
+                <option value="moneyFalse">필요없음</option>
+                <!-- 기타 지역 옵션 추가 -->
+            </select>
+
+            <label for="State">재산:</label>
+            <select id="State" name="State">
+                <option value="moneyTrue">필요함</option>
+                <option value="moneyFalse">필요없음</option>
+                <!-- 기타 지역 옵션 추가 -->
+            </select>
+
+
             <!-- 기타 입력 필드 추가 -->
             <button type="submit">신청</button>
             <button type="reset">초기화</button>
