@@ -1,37 +1,37 @@
 <?php
 // 데이터베이스 연결 설정
 $servername = "localhost"; // 호스트명
-$username = "사용자이름"; // 데이터베이스 사용자명
-$password = "비밀번호"; // 데이터베이스 암호
-$dbname = "데이터베이스이름"; // 사용할 데이터베이스 이름
+$username = "root"; // 데이터베이스 사용자명
+$password = "sin87531"; // 데이터베이스 암호
+$dbname = "mydb"; // 사용할 데이터베이스 이름
 
 try {
     // PDO 객체 생성 및 데이터베이스 연결
-    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+    $conn = new PDO("jdbc:mysql://localhost:3306/sampledb", "root", "sin87531");
 
     // PDO 객체가 예외를 던지도록 설정
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     // POST로 전달된 데이터 받기
-    $region = $_POST['지역'];
-    $subRegion = $_POST['구_동'];
-    $agency = $_POST['기관명'];
-    $keyword = $_POST['키워드'];
-    $onlineApplication = $_POST['온라인신청여부'];
-    $age = $_POST['나이'];
-    $gender = $_POST['성별'];
-    $other = $_POST['기타'];
+    $region = $_POST['selectedRegion'];
+    $subRegion = $_POST['selected_rnehd'];
+    $agency = $_POST['selectedAgencyname'];
+    $keyword = $_POST['selectedKeyword'];
+    $onlineApplication = $_POST['selectedYesno'];
+    $age = $_POST['selectedAge'];
+    $gender = $_POST['selectedSex'];
+    $other = $_POST['selectedGuitar'];
 
     // SQL 쿼리 작성
     $sql = "SELECT * FROM your_table WHERE 
-                region = :region AND
-                sub_region = :sub_region AND
-                agency = :agency AND
+                regionS = :region AND
+                pulnstitutionS = :sub_region AND
+                serviceKeyS = :agency AND
                 keyword = :keyword AND
-                online_application = :online_application AND
-                age = :age AND
-                gender = :gender AND
-                other = :other";
+                onlineTFS = :online_application AND
+                ageS = :age AND
+                genderS = :gender AND
+                otherS = :other";
 
     // PDO Statement 객체 생성
     $stmt = $conn->prepare($sql);

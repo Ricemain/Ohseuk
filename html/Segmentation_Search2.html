@@ -7,18 +7,18 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-    $(document).ready(function(){
+  $(document).ready(function(){
     $('.search').click(function(){
         // 선택된 값들을 가져와서 검색에 사용할 데이터로 구성
         var searchData = {
-            지역: $('select[name="dropdown1"]').val() || '', // 선택하지 않으면 빈 값으로 설정
-            구_동: $('select[name="dropdown2"]').val() || '', // 선택하지 않으면 빈 값으로 설정
-            기관명: $('select[name="dropdown3"]').val() || '', // 선택하지 않으면 빈 값으로 설정
-            키워드: $('select[name="dropdown4"]').val() || '', // 선택하지 않으면 빈 값으로 설정
-            온라인신청여부: $('select[name="dropdown7"]').val() || '', // 선택하지 않으면 빈 값으로 설정
-            나이: $('select[name="dropdown8"]').val() || '', // 선택하지 않으면 빈 값으로 설정
-            성별: $('select[name="dropdown9"]').val() || '', // 선택하지 않으면 빈 값으로 설정
-            기타: $('select[name="dropdown10"]').val() || '' // 선택하지 않으면 빈 값으로 설정
+          selectedRegion: $('select[name="dropdown1"]').val() || '', // 선택하지 않으면 빈 값으로 설정
+          selected_rnehd: $('select[name="dropdown2"]').val() || '', // 선택하지 않으면 빈 값으로 설정
+          selectedAgencyname: $('select[name="dropdown3"]').val() || '', // 선택하지 않으면 빈 값으로 설정
+          selectedKeyword: $('select[name="dropdown4"]').val() || '', // 선택하지 않으면 빈 값으로 설정
+          selectedYesno: $('select[name="dropdown7"]').val() || '', // 선택하지 않으면 빈 값으로 설정
+          selectedAge: $('select[name="dropdown8"]').val() || '', // 선택하지 않으면 빈 값으로 설정
+          selectedSex: $('select[name="dropdown9"]').val() || '', // 선택하지 않으면 빈 값으로 설정
+          selectedGuitar: $('select[name="dropdown10"]').val() || '' // 선택하지 않으면 빈 값으로 설정
         };
 
         // 검색 데이터를 서버로 전송하여 검색 결과를 받아옴
@@ -27,8 +27,12 @@
             url: 'search.php', // 검색을 수행할 서버 측 스크립트 경로
             data: searchData,
             success: function(response) {
-                // 검색 결과를 출력
-                $('#searchResults').html(response);
+                // 검색 결과를 out.html에 출력
+                window.location.href = 'out.html?searchResult=' + encodeURIComponent(response);
+            },
+            error: function() {
+                // 검색 실패 시 out.html로 이동
+                window.location.href = 'out.html';
             }
         });
     });
@@ -158,6 +162,7 @@
     </div>
 
   </div>
-  
+    <!-- 검색 결과를 출력할 영역 -->
+    <div id="searchResults"></div>
 </body>
 </html>
