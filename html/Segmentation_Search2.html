@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sliverlink</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+    $('.search').click(function(){
+        // 선택된 값들을 가져와서 검색에 사용할 데이터로 구성
+        var searchData = {
+            지역: $('select[name="dropdown1"]').val() || '', // 선택하지 않으면 빈 값으로 설정
+            구_동: $('select[name="dropdown2"]').val() || '', // 선택하지 않으면 빈 값으로 설정
+            기관명: $('select[name="dropdown3"]').val() || '', // 선택하지 않으면 빈 값으로 설정
+            키워드: $('select[name="dropdown4"]').val() || '', // 선택하지 않으면 빈 값으로 설정
+            온라인신청여부: $('select[name="dropdown7"]').val() || '', // 선택하지 않으면 빈 값으로 설정
+            나이: $('select[name="dropdown8"]').val() || '', // 선택하지 않으면 빈 값으로 설정
+            성별: $('select[name="dropdown9"]').val() || '', // 선택하지 않으면 빈 값으로 설정
+            기타: $('select[name="dropdown10"]').val() || '' // 선택하지 않으면 빈 값으로 설정
+        };
+
+        // 검색 데이터를 서버로 전송하여 검색 결과를 받아옴
+        $.ajax({
+            type: 'POST',
+            url: 'search.php', // 검색을 수행할 서버 측 스크립트 경로
+            data: searchData,
+            success: function(response) {
+                // 검색 결과를 출력
+                $('#searchResults').html(response);
+            }
+        });
+    });
+
+    $('.reset').click(function(){
+        // 모든 콤보박스 초기화
+        $('select').val('');
+        // 결과 출력 영역 초기화
+        $('#searchResults').empty();
+    });
+});
+
+</script>
+
+</head>
+<body>
+    <header class="header">
+        <h1>sliverlink</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="#">복지혜택 검색</a></li>
+            <li><a href="#">커뮤니티 기능</a></li>
+            <li><a href="#">맞춤형 추천 받기</a></li>
+            <li><a href="#">이벤트</a></li>
+            <li><a href="#">고객센터 문의하기</a></li>
+            <button id="loginButton">로그인</button>
+        </ul>
+    </nav>
+    
+    <div class="small">
+      • 복지혜택 검색 &gt; <span>세분화 검색</span>
+  </div>
+
+  <div class="big">
+      세분화 검색
+  </div>
+
+  
+
+  <div class="container">
+    <div class="row">
+      <div class="text">지역</div>
+      <div class="select-wrapper ">
+        <select name="dropdown1">
+          <option value="">시/도</option>
+          <option value="1">서울특별시</option>
+          <option value="2">멀</option>
+          <option value="3">라</option>
+        </select>
+      </div>
+      <div class="select-wrapper ">
+        <select name="dropdown2">
+          <option value="">구/동</option>
+          <option value="1">아</option>
+          <option value="2">몰</option>
+          <option value="3">랑</option>
+        </select>
+      </div>
+      <div class="text">기관명</div>
+      <div class="select-wrapper">
+        <select name="dropdown3">
+          <option value="">선택하세요</option>
+          <option value="1">무슨</option>
+          <option value="2">기관명</option>
+          <option value="3">??</option>
+        </select>
+      </div>
+    </div>
+  
+    <div class="row">
+      <div class="text">키워드</div>
+
+      <div class="select-wrapper">
+        <select name="dropdown4">
+          <option value="">선택하세요</option>
+          <option value="1">아</option>
+          <option value="2">몰</option>
+          <option value="3">랑</option>
+        </select>
+      </div>
+      <div class="text">온라인신청여부</div>
+      <div class="select-wrapper">
+        <select name="dropdown7">
+          <option value="">선택하세요</option>
+          <option value="1">예스</option>
+          <option value="2">노우</option>
+        </select>
+      </div>
+    </div>
+  
+    <div class="row">
+      <div class="text">나이</div>
+      <div class="select-wrapper">
+        <select name="dropdown8">
+          <option value=""></option>
+          <option value="1">~20세</option>
+          <option value="2">~40세</option>
+          <option value="3">~60세</option>
+        </select>
+      </div>
+      <div class="text">성별</div>
+      <div class="select-wrapper">
+        <select name="dropdown9">
+          <option value=""></option>
+          <option value="1">남성</option>
+          <option value="2">여성</option>
+        </select>
+      </div>
+      <div class="text">기타</div>
+      <div class="select-wrapper">
+        <select name="dropdown10">
+          <option value=""></option>
+          <option value="1">기타</option>
+          <option value="2">통기타</option>
+          <option value="3">비타민</option>
+        </select>
+      </div>
+    </div>
+    
+
+    <div class="row"></div><div class="row"></div><div class="row"></div>
+
+    <div class="button-container">
+      <button class="search"> 검색 </button>
+      <button class="reset">초기화</button>
+    </div>
+
+  </div>
+  
+</body>
+</html>
