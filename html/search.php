@@ -7,7 +7,7 @@ $dbname = "mydb"; // 사용할 데이터베이스 이름
 
 try {
     // PDO 객체 생성 및 데이터베이스 연결
-    $conn = new PDO("jdbc:mysql://localhost:3306/sampledb", "root", "sin87531");
+    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
 
     // PDO 객체가 예외를 던지도록 설정
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -23,15 +23,7 @@ try {
     $other = $_POST['selectedGuitar'];
 
     // SQL 쿼리 작성
-    $sql = "SELECT * FROM your_table WHERE 
-                regionS = :region AND
-                pulnstitutionS = :sub_region AND
-                serviceKeyS = :agency AND
-                keyword = :keyword AND
-                onlineTFS = :online_application AND
-                ageS = :age AND
-                genderS = :gender AND
-                otherS = :other";
+    $sql = "SELECT * FROM silverlinksearch";
 
     // PDO Statement 객체 생성
     $stmt = $conn->prepare($sql);

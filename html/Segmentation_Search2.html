@@ -28,7 +28,7 @@
             data: searchData,
             success: function(response) {
                 // 검색 결과를 out.html에 출력
-                window.location.href = 'out.html?searchResult=' + encodeURIComponent(response);
+                window.location.href = 'success.html?searchResult=' + encodeURIComponent(response);
             },
             error: function() {
                 // 검색 실패 시 out.html로 이동
@@ -79,7 +79,7 @@
       <div class="select-wrapper ">
         <select name="dropdown1">
           <option value="">시/도</option>
-          <option value="1">서울특별시</option>
+          <option value="1">서울</option>
           <option value="2">멀</option>
           <option value="3">라</option>
         </select>
