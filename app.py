@@ -7,7 +7,7 @@ app = Flask(__name__, template_folder='html')
 # MySQL configurations
 app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = 'sin87531'
-app.config['MYSQL_DB'] = 'mydb'
+app.config['MYSQL_DB'] = 'mydatabase'
 app.config['MYSQL_HOST'] = 'localhost'
 
 mysql = MySQL(app)
@@ -18,13 +18,15 @@ def index():
 
 @app.route('/search', methods=['POST'])
 def search():
-    region = request.form.get('State')
-    institution = request.form.get('Organization')
-    keyword = request.form.get('contents')
+    region = request.form.get('region')
+    district = request.form.get('district')
+    organization = request.form.get('organization')
+    keyword = request.form.get('keyword')
     online = request.form.get('online')
     age = request.form.get('age')
     gender = request.form.get('gender')
     other = request.form.get('other')
+
 
     query = "SELECT * FROM silverlinksearch WHERE 1=1"
     params = []
@@ -32,9 +34,9 @@ def search():
     if region:
         query += " AND regionS = %s"
         params.append(region)
-    if institution:
+    if district:
         query += " AND pulnstitutionS LIKE %s"
-        params.append('%' + institution + '%')
+        params.append('%' + organization + '%')
     if keyword:
         query += " AND serviceKeyS LIKE %s"
         params.append('%' + keyword + '%')
@@ -51,12 +53,13 @@ def search():
         query += " AND otherS = %s"
         params.append(other)
 
+
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
     cursor.execute(query, tuple(params))
-    data = cursor.fetchall()
+    result = cursor.fetchall()
     cursor.close()
 
-    return render_template('results.html', data=data)
+    return render_template('results.html', result=result)
 
 if __name__ == "__main__":
     app.run(debug=True)

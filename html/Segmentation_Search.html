@@ -2,60 +2,188 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>세분화 검색</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sliverlink</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="#">복지혜택 검색</a></li>
-                <li><a href="#">커뮤니티 기능</a></li>
-                <li><a href="#">맞춤형 추천</a></li>
-                <li><a href="#">이벤트</a></li>
-                <li><a href="#">고객센터</a></li>
-            </ul>
-        </nav>
+    <header class="header">
+        <h1>sliverlink</h1>
     </header>
-    <main>
-        <form action="/search" method="post">
-            <p>복지혜택 검색 > 세분화 검색</p>
-            <h1>서비스 신청서</h1>
-            <label for="State">지역:</label>
-            <select id="State" name="State">
-                <option value="">선택</option>
-                <option value="seoul">서울</option>
-                <option value="busan">부산</option>
-                <option value="daegu">대구</option>
-                <!-- 기타 지역 옵션 추가 -->
-            </select>
-            <label for="Organization">기관명:</label>
-            <textarea rows="1" cols="20" name="Organization"></textarea><br>
-            <label for="keyword">키워드:</label>
-            <textarea rows="1" cols="20" name="contents"></textarea>
-            <label for="online">온라인 신청 여부:</label>
-            <select id="online" name="online">
-                <option value="">선택</option>
-                <option value="onlineTrue">필요함</option>
-                <option value="onlineFalse">필요없음</option>
-            </select>
-            <label for="age">나이:</label>
-            <textarea rows="1" cols="4" name="age"></textarea>
-            <label for="gender">성별:</label>
-            <select id="gender" name="gender">
-                <option value="">선택</option>
-                <option value="genderG">여성</option>
-                <option value="genderM">남성</option>
-            </select>
-            <label for="other">기타:</label>
-            <select id="other" name="other">
-                <option value="">선택</option>
-                <option value="veterans">보훈대상자</option>
-                <option value="Disabled">장애인</option>
-            </select><br>
-            <button type="submit">신청</button>
-            <button type="reset">초기화</button>
-        </form>
-    </main>
+    <nav>
+        <ul>
+            <li><a href="#">복지혜택 검색</a></li>
+            <li><a href="#">커뮤니티 기능</a></li>
+            <li><a href="#">맞춤형 추천 받기</a></li>
+            <li><a href="#">이벤트</a></li>
+            <li><a href="#">고객센터 문의하기</a></li>
+            <button id="loginButton">로그인</button>
+        </ul>
+    </nav>
+    
+    <div class="small">
+      • 복지혜택 검색 &gt; <span>세분화 검색</span>
+  </div>
+
+  <div class="big">
+      세분화 검색
+  </div>
+
+  
+
+  <div class="container">
+    <div class="row">
+      <div class="text">지역</div>
+      <div class="select-wrapper ">
+        <select name="region" id="region">
+          <option value="">시/도</option>
+          <option value="1">서울특별시</option>
+          <option value="2">멀</option>
+          <option value="3">라</option>
+        </select>
+      </div>
+      <div class="select-wrapper ">
+        <select name="district" id="district">
+          <option value="">구/동</option>
+          <option value="1">아</option>
+          <option value="2">몰</option>
+          <option value="3">랑</option>
+        </select>
+      </div>
+      <div class="text">기관명</div>
+      <div class="select-wrapper">
+        <select name="organization" id="organization">
+          <option value="">선택하세요</option>
+          <option value="1">무슨</option>
+          <option value="2">기관명</option>
+          <option value="3">??</option>
+        </select>
+      </div>
+    </div>
+  
+    <div class="row">
+      <div class="text">키워드</div>
+      <div class="select-wrapper">
+        <select name="keyword" id="keyword">
+          <option value="">선택하세요</option>
+          <option value="1">노년</option>
+          <option value="2">몰</option>
+          <option value="3">랑</option>
+        </select>
+      </div>
+      <div class="text">온라인신청여부</div>
+      <div class="select-wrapper">
+        <select name="online" id="online">
+          <option value="">선택하세요</option>
+          <option value="1">예스</option>
+          <option value="2">노우</option>
+        </select>
+      </div>
+    </div>
+  
+    <div class="row">
+      <div class="text">나이</div>
+      <div class="select-wrapper">
+        <select name="age" id="age">
+          <option value=""></option>
+          <option value="1">~20세</option>
+          <option value="2">~40세</option>
+          <option value="3">~60세</option>
+        </select>
+      </div>
+      <div class="text">성별</div>
+      <div class="select-wrapper">
+        <select name="gender" id="gender">
+          <option value=""></option>
+          <option value="1">남성</option>
+          <option value="2">여성</option>
+        </select>
+      </div>
+      <div class="text">기타</div>
+      <div class="select-wrapper">
+        <select name="other" id="other">
+          <option value=""></option>
+          <option value="1">기타</option>
+          <option value="2">통기타</option>
+          <option value="3">비타민</option>
+        </select>
+      </div>
+    </div>
+    
+
+    <div class="row"></div><div class="row"></div><div class="row"></div>
+
+    <div class="button-container">
+      <button class="search"> 검색 </button>
+      <button class="reset">초기화</button>
+    </div>
+
+  </div>
+  
+  
+  <div class="result">
+    총 1건의 검색결과가 있습니다.
+  </div>
+  <div class="divider"></div>
+
+
+  <div class="result">
+    {% for item in result %}
+    <div class="small-box">
+        <p class="small-text"><strong>{{ item.title }}</strong><br><br>
+            {{ item.description }}<br><br>
+        </p>
+        <div class="button-small">
+            <button class="details">자세히</button>
+            <button class="application">신청</button>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+  
+
+
+</div>
+<script src="script.js">
+    function search() {
+        var region = document.getElementById('region').value;
+        var district = document.getElementById('district').value;
+        var organization = document.getElementById('organization').value;
+        var keyword = document.getElementById('keyword').value;
+        var online = document.getElementById('online').value;
+        var age = document.getElementById('age').value;
+        var gender = document.getElementById('gender').value;
+        var other = document.getElementById('other').value;
+
+  
+      // Flask 앱으로 POST 요청을 보냄
+      fetch('/search', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          region: region,
+          district: district,
+          organization: organization,
+          keyword: keyword,
+          online: online,
+          age: age,
+          gender: gender,
+          other: other
+        })
+      })
+      .then(response => {
+        // 여기에 검색 결과를 처리하는 코드를 추가할 수 있어요
+        console.log('검색 요청이 성공했습니다.');
+      })
+      .catch(error => {
+        console.error('검색 요청 중 오류가 발생했습니다:', error);
+      });
+    }
+  </script>
+  
+
 </body>
 </html>
