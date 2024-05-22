@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 from flask_mysqldb import MySQL
 import MySQLdb.cursors
 
@@ -18,23 +18,26 @@ def index():
 
 @app.route('/search', methods=['POST'])
 def search():
-    region = request.form.get('region')
-    district = request.form.get('district')
-    organization = request.form.get('organization')
-    keyword = request.form.get('keyword')
-    online = request.form.get('online')
-    age = request.form.get('age')
-    gender = request.form.get('gender')
-    other = request.form.get('other')
+    data = request.get_json()
+    region = data.get('region')
+    district = data.get('district')
+    organization = data.get('organization')
+    keyword = data.get('keyword')
+    online = data.get('online')
+    age = data.get('age')
+    gender = data.get('gender')
+    other = data.get('other')
 
-
-    query = "SELECT * FROM silverlinksearch WHERE 1=1"
+    query = "SELECT idS FROM silverlinksearch WHERE 1=1"
     params = []
 
     if region:
         query += " AND regionS = %s"
         params.append(region)
     if district:
+        query += " AND districtS = %s"
+        params.append(district)
+    if organization:
         query += " AND pulnstitutionS LIKE %s"
         params.append('%' + organization + '%')
     if keyword:
@@ -53,13 +56,12 @@ def search():
         query += " AND otherS = %s"
         params.append(other)
 
-
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
     cursor.execute(query, tuple(params))
     result = cursor.fetchall()
     cursor.close()
 
-    return render_template('results.html', result=result)
+    return jsonify(result)
 
 if __name__ == "__main__":
     app.run(debug=True)
