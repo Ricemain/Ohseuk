@@ -66,7 +66,7 @@
           <select name="keyword" id="keyword">
             <option value="">선택하세요</option>
             <option value="노년">노년</option>
-            <option value="몰">몰</option>
+            <option value="노인">노인</option>
             <option value="랑">랑</option>
           </select>
         </div>
@@ -111,30 +111,14 @@
   
       <div class="button-container">
         <button type="submit" class="search">검색</button>
-        <button type="reset" class="reset">초기화</button>
+        <button type="reset" class="reset" onclick="resetForm()">초기화</button>
       </div>
     </form>
   </div>
-  <!-- <div class="small-box"> 여기에 들어가면 결과가 안뜸-->
+  
   <div class="result">
-    {% if result %}
-        총 {{ result|length }}건의 검색결과가 있습니다.
-        <div class="divider"></div>
-        {% for item in result %}
-            <div class="small-box">
-                <p class="small-text"><strong>{{ item.title }}</strong><br><br>
-                {{ item.description }}<br><br></p>
-                <div class="button-small">
-                    <button class="details">자세히</button>
-                    <button class="application">신청</button>
-                </div>
-            </div>
-        {% endfor %}
-    {% else %}
-        검색 결과가 없습니다.
-    {% endif %}
+    <!-- 검색 결과가 이곳에 표시됩니다. -->
   </div>
-<!-- </div> -->
 
   <script>
     function search() {
@@ -172,12 +156,7 @@
             data.forEach(item => {
                 resultContainer.innerHTML += `
                     <div class="small-box">
-                        <p class="small-text"><strong>${item.title}</strong><br><br>
-                        ${item.description}<br><br></p>
-                        <div class="button-small">
-                            <button class="details">자세히</button>
-                            <button class="application">신청</button>
-                        </div>
+                        <p class="small-text"><strong>ID: ${item.idS}</strong></p>
                     </div>
                 `;
             });
@@ -185,6 +164,12 @@
         .catch(error => {
             console.error('검색 요청 중 오류가 발생했습니다:', error);
         });
+    }
+
+    function resetForm() {
+        document.getElementById('searchForm').reset();
+        const resultContainer = document.querySelector('.result');
+        resultContainer.innerHTML = '';
     }
   </script>
 </body>
