@@ -2,7 +2,7 @@ from flask import Flask, render_template, request
 from flask_mysqldb import MySQL
 import MySQLdb.cursors
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='html')
 
 # MySQL configurations
 app.config['MYSQL_USER'] = 'root'
