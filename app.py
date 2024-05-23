@@ -38,7 +38,7 @@ def search():
         query += " AND districtS = %s"
         params.append(district)
     if organization:
-        query += " AND pulnstitutionS LIKE %s"
+        query += " AND puInstitutionS LIKE %s"
         params.append('%' + organization + '%')
     if keyword:
         query += " AND serviceKeyS LIKE %s"
