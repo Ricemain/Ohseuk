@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sliverlink</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="header">
+        <h1>sliverlink</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="#">복지혜택 검색</a></li>
+            <li><a href="#">커뮤니티 기능</a></li>
+            <li><a href="#">맞춤형 추천 받기</a></li>
+            <li><a href="#">이벤트</a></li>
+            <li><a href="#">고객센터 문의하기</a></li>
+            <button id="loginButton">로그인</button>
+        </ul>
+    </nav>
+    <div class="search">
+        <input id="searchInput" type="text" placeholder="검색어를 입력하세요.">
+        <button id="searchButton">검색</button>
+    </div>
+    
+    <div class="notice-wrapper">
+        <div class="notice">
+            <p class="notice-title">공지사항</p>
+            <p class="notice-content">여기에 공지 내용을 작성하세요.</p>
+            <div class="arrows">
+                <button id="prevNotice">∧</button>
+                <button id="nextNotice">∨</button>
+            </div>
+        </div>
+        <div class="search-ranking">
+            <p class="ranking-title">검색순위</p>
+            <div class="ranking-content">
+                <div class="rankings-wrapper">
+                <ul id="rankingList">
+                    <li>1. 청년주택</li>
+                    <li>2. 서울시 보험료 납입</li>
+                    <li>3. 건강보험 조건</li>
+                    <li>4. 국민연금 신청</li>
+                    <li>5. 고용보험 이행</li>
+                    <li>6. 양육비 청구</li>
+                    <li>7. 소득세 청구</li>
+                    <li>8. 국민연금 조회</li>
+                    <li>9. 실업급여 신청</li>
+                    <li>10. 생활안전지킴이 운영</li>
+                </ul>
+                </div>
+                <button id="nextRank">∨</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="extra-box">
+        <p class="extra-title">자주찾는 서비스</p>
+        <div class="extra-button-container">
+          <div class="extra-button"></div>
+          <p class="button-text">서비스 신청</p>
+        </div>
+        <div class="extra-button-container">
+            <a href="file:///C:/Users/dbsdu/Desktop/cap/%EC%84%B8%EB%B6%84%ED%99%94%EA%B2%80%EC%83%89/se.html">
+              <div class="extra-button"></div>
+            </a>
+            <p class="button-text">복지혜택 검색</p>
+          </div>        
+        <div class="extra-button-container">
+          <div class="extra-button"></div>
+          <p class="button-text">맞춤형<br>복지추천</p>
+        </div>
+        <div class="extra-button-container">
+          <div class="extra-button"></div>
+          <p class="button-text">커뮤니티</p>
+        </div>
+        <div class="extra-button-container">
+          <div class="extra-button"></div>
+          <p class="button-text">이벤트</p>
+        </div>
+      </div>
+
+    <script>
+        // 검색
+        document.getElementById('searchButton').addEventListener('click', function() {
+            var searchInput = document.getElementById('searchInput').value;
+            fetch('/search', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ keyword: searchInput })
+            })
+            .then(response => response.json())
+            .then(data => {
+                window.location.href = "/result?keyword=" + encodeURIComponent(searchInput);
+            })
+            .catch(error => console.error('Error:', error));
+        });
+        //검색끝
+    </script>
+</body>
+</html>
