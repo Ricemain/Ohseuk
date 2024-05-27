@@ -11,7 +11,7 @@ app.config['MYSQL_DB'] = 'mydatabase'
 app.config['MYSQL_HOST'] = 'localhost'
 
 mysql = MySQL(app)
-
+#dssd
 @app.route('/')
 def index():
     return render_template('Segmentation_search.html')
