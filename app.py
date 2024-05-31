@@ -1,3 +1,4 @@
+# 세분화검색
 from flask import Flask, render_template, request, jsonify
 from flask_mysqldb import MySQL
 import MySQLdb.cursors
