@@ -1,42 +1,36 @@
-#메인 검색
-from flask import Flask, request, jsonify, render_template
-import mysql.connector
+from flask import Flask, render_template, request, jsonify
+from flask_mysqldb import MySQL
+import MySQLdb.cursors
 
 app = Flask(__name__)
 
-# MySQL 데이터베이스 연결 설정
-db_config = {
-    'user': 'root',
-    'password': 'sin87531',
-    'host': 'localhost',
-    'database': 'silverlink'
-}
+# MySQL configurations
+app.config['MYSQL_USER'] = 'root'
+app.config['MYSQL_PASSWORD'] = 'sin87531'
+app.config['MYSQL_DB'] = 'silverlink'
+app.config['MYSQL_HOST'] = 'localhost'
 
-# 메인 페이지 렌더링
+mysql = MySQL(app)
+
 @app.route('/')
 def index():
     return render_template('main.html')
 
-# 검색 요청 처리
 @app.route('/search', methods=['POST'])
 def search():
     data = request.get_json()
     search_query = data.get('query')
     
-    # MySQL 연결
-    cnx = mysql.connector.connect(**db_config)
-    cursor = cnx.cursor()
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
 
-    # 검색 쿼리 실행
     query = "SELECT * FROM silverlinkcontent WHERE idC LIKE %s"
-    cursor.execute(query, ('%' + search_query + '%',))
+    params = ('%' + search_query + '%',)
+    cursor.execute(query, params)
 
-    # 검색 결과 가져오기
     results = cursor.fetchall()
-
-    # 연결 종료
     cursor.close()
-    cnx.close()
 
-    # 결과를 JSON으로 반환
-    return
+    return jsonify({'results': results})
+
+if __name__ == "__main__":
+    app.run(debug=True)

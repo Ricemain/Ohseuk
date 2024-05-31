@@ -73,7 +73,7 @@ document.getElementById('searchButton').addEventListener('click', function() {
       resultsDiv.innerHTML = '';
       data.results.forEach(result => {
           const resultElement = document.createElement('div');
-          resultElement.textContent = result;
+          resultElement.textContent = JSON.stringify(result);
           resultsDiv.appendChild(resultElement);
       });
   });
