@@ -4,6 +4,7 @@ import MySQLdb.cursors
 
 app = Flask(__name__, template_folder='html')
 
+
 # MySQL configurations
 app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = 'sin87531'
