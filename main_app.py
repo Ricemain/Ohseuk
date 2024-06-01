@@ -7,7 +7,7 @@ app = Flask(__name__, template_folder='메인페이지')
 # MySQL configurations
 app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = 'sin87531'
-app.config['MYSQL_DB'] = 'silverlink'
+app.config['MYSQL_DB'] = 'mydatabase'
 app.config['MYSQL_HOST'] = 'localhost'
 
 mysql = MySQL(app)
@@ -18,19 +18,17 @@ def index():
 
 @app.route('/search', methods=['POST'])
 def search():
-    data = request.get_json()
-    search_query = data.get('query')
+    search_query = request.form.get('query')
     
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
 
-    query = "SELECT * FROM silverlinkcontent WHERE idC LIKE %s"
+    query = "SELECT * FROM silverlinkcontent1 WHERE idC LIKE %s"
     params = ('%' + search_query + '%',)
     cursor.execute(query, params)
 
     results = cursor.fetchall()
     cursor.close()
 
-    # 검색 결과를 JSON 형식으로 반환합니다.
     return render_template('results.html', results=results)
 
 if __name__ == "__main__":
