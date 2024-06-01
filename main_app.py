@@ -22,7 +22,7 @@ def search():
     
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
 
-    query = "SELECT * FROM silverlinkcontent WHERE idC LIKE %s"
+    query = "SELECT * FROM silverlinkcontent1 WHERE idC LIKE %s"
     params = ('%' + search_query + '%',)
     cursor.execute(query, params)
 

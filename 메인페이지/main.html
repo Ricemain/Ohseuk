@@ -126,6 +126,11 @@
     </div>
 
     <br><br><br>
-    <script src="script.js"></script>
+    <script src="script.js">
+      document.getElementById('searchButton').addEventListener('click', function() {
+        var searchValue = document.getElementById('searchInput').value;
+        window.location.href = '/results?query=' + encodeURIComponent(searchValue);
+      });
+    </script>
 </body>
 </html>
