@@ -7,7 +7,7 @@ app = Flask(__name__, template_folder='메인페이지')
 # MySQL configurations
 app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = 'sin87531'
-app.config['MYSQL_DB'] = 'mydatabase'
+app.config['MYSQL_DB'] = 'silverlink'
 app.config['MYSQL_HOST'] = 'localhost'
 
 mysql = MySQL(app)
@@ -31,7 +31,7 @@ def search():
     cursor.close()
 
     # 검색 결과를 JSON 형식으로 반환합니다.
-    return jsonify(results=results)
+    return render_template('results.html', results=results)
 
 if __name__ == "__main__":
     app.run(debug=True)

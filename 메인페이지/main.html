@@ -131,9 +131,11 @@
 
     <script src="script.js">
     
-      //검색 main_app.py로 데이터전송
-      document.getElementById('searchButton').addEventListener('click', function() {
-        const query = document.getElementById('searchInput').value;
+        document.getElementById('searchButton').addEventListener('click', function() {
+        // 검색어를 가져옵니다.
+        var searchValue = document.getElementById('searchInput').value;
+
+        // 서버로부터 결과를 가져와서 화면에 출력합니다.
         fetch('/search', {
             method: 'POST',
             headers: {
@@ -144,14 +146,19 @@
         .then(response => response.json())
         .then(data => {
             const resultsDiv = document.getElementById('results');
-            resultsDiv.innerHTML = '';
-            data.results.forEach(result => {
-                const resultElement = document.createElement('div');
-                resultElement.textContent = result;
-                resultsDiv.appendChild(resultElement);
-            });
+            // 결과가 없는 경우 메시지를 표시합니다.
+            if (data.results.length === 0) {
+                resultsDiv.textContent = '검색 결과가 없습니다.';
+            } else {
+                // 결과를 반복하여 화면에 출력합니다.
+                data.results.forEach(result => {
+                    const resultElement = document.createElement('div');
+                    resultElement.textContent = result;
+                    resultsDiv.appendChild(resultElement);
+                });
+            }
         });
-      });
+      }); 
     </script>
 </body>
 </html>
