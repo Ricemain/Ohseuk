@@ -1,17 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Search Results</title>
+    <title>검색 결과</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Search Results for "{{ query }}"</h1>
-    <ul>
-        {% for result in results %}
+    <header class="header">
+        <h1>검색 결과</h1>
+    </header>
+    <div class="results">
+        <ul>
+            {% for result in results %}
             <li>{{ result }}</li>
-        {% endfor %}
-    </ul>
-    <a href="/">Back to Search</a>
+            {% endfor %}
+        </ul>
+    </div>
 </body>
 </html>

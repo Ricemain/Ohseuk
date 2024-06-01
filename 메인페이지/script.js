@@ -56,25 +56,3 @@ setInterval(() => {
 }, 4000);
 
 updateRank();
-
-//검색 main_app.py로 데이터전송
-document.getElementById('searchButton').addEventListener('click', function() {
-  const query = document.getElementById('searchInput').value;
-  fetch('/search', {
-      method: 'POST',
-      headers: {
-          'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ query: query })
-  })
-  .then(response => response.json())
-  .then(data => {
-      const resultsDiv = document.getElementById('results');
-      resultsDiv.innerHTML = '';
-      data.results.forEach(result => {
-          const resultElement = document.createElement('div');
-          resultElement.textContent = JSON.stringify(result);
-          resultsDiv.appendChild(resultElement);
-      });
-  });
-});
