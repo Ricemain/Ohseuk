@@ -110,7 +110,7 @@
     <br><br>
 
     <div class="button-container">
-      <button class="search" onclick="search(this.value)"> 검색 </button>
+      <button class="search"> 검색 </button>
       <button class="reset">초기화</button>
     </div>
 
@@ -184,38 +184,5 @@
         });
       }
     }
-  }
-
-function search() {
-  const mysql = require('mysql');
-
-  // Create a connection
-  const connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: 'ch66a11o22s$',
-    database: 'silverlink'
-  });
-
-  // Connect to the database
-  connection.connect((err) => {
-    if (err) {
-      console.error('Error connecting to MySQL:', err);
-      return;
-    }
-    console.log('Connected to MySQL!');
-  });
-
-  // Perform database operations here
-  connection.query('SELECT * FROM silverlinksearch1 WHERE region2Element = ?', [region2Element], (error, results) => {
-    if (error) {
-      console.error('Error executing query:', error);
-      return;
-    }
-    console.log('Results:', results);
-  });
-
-  // Close the connection
-  connection.end();
   }
 </script>
