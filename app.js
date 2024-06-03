@@ -1,75 +1,45 @@
 const express = require('express');
-const mysql = require('mysql');
-const bodyParser = require('body-parser');
 const app = express();
+var db = require('./database.js');
 
-app.set('view engine', 'ejs');
-app.set('views', __dirname + '/views');
-app.use(bodyParser.json());
+app.use(express.static('public'));
 
-// MySQL configurations
-const db = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: 'sin87531',
-    database: 'mydatabase'
+app.listen(8080, () => {
+    console.log('Server is running on http://localhost:8080');
 });
 
-db.connect((err) => {
-    if (err) throw err;
-    console.log('MySQL Connected...');
+app.get('/refinesearch/se',(req,res)=>{
+    res.sendFile(__dirname + '/refinesearch/se.html');
 });
 
-app.get('/', (req, res) => {
-    res.render('Segmentation_search');
-});
+app.get('refinesearch/script.js', (req, res) => {
+    res.sendFile(__dirname + 'refinesearch/script.js')
+})
 
-app.post('/search', (req, res) => {
-    const data = req.body;
-    const { region, district, organization, keyword, online, age, gender, other } = data;
-
-    let query = "SELECT idS FROM silverlinksearch WHERE 1=1";
-    let params = [];
-
-    if (region) {
-        query += " AND regionS = ?";
-        params.push(region);
-    }
-    if (district) {
-        query += " AND districtS = ?";
-        params.push(district);
-    }
-    if (organization) {
-        query += " AND puInstitutionS LIKE ?";
-        params.push('%' + organization + '%');
-    }
-    if (keyword) {
-        query += " AND serviceKeyS LIKE ?";
-        params.push('%' + keyword + '%');
-    }
-    if (online) {
-        query += " AND onlineTFS = ?";
-        params.push(online);
-    }
-    if (age) {
-        query += " AND ageS = ?";
-        params.push(age);
-    }
-    if (gender) {
-        query += " AND genderS = ?";
-        params.push(gender);
-    }
-    if (other) {
-        query += " AND otherS = ?";
-        params.push(other);
-    }
-
-    db.query(query, params, (err, results) => {
-        if (err) throw err;
-        res.json(results);
+app.get('/refinesearch/se/search',(req,res)=>{
+    const region1 = req.query.region1;
+    const region2 = req.query.region2;
+    db.getResultByRegion(region1, region2, (err, result) => {
+        if(err) return res.status(500).send('DB Error');
+        res.json(result);
     });
 });
 
-app.listen(3000, () => {
-    console.log('Server started on port 3000');
+
+app.get('/list', function (req, res) {
+    var sql = 'SELECT * FROM user';
+    db.getConnection().query(sql, function (err, rows, fields) {
+        if(err) console.log('query is not excuted. select fail...\n' + err);
+        else res.send(rows);
+    });
 });
+
+
+
+// app.get('/insert', function (req, res) {
+//     res.send('test')
+// });
+
+
+
+

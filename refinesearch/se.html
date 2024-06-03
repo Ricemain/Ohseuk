@@ -132,8 +132,6 @@
 
 <ul id="result-list">aefaf</ul>
 
-<script src="script.js"></script>
-
 </body>
 </html>
 
@@ -186,6 +184,8 @@
   function search() {
     var region1 = document.getElementById("region1").value;
     var region2 = document.getElementById("region2").value;
+    console.log(region1);
+    console.log(region2);
 
     const resultList = document.getElementById("result-list");
     resultList.innerHTML = "";
@@ -193,17 +193,15 @@
     li.innerHTML = "test";
     resultList.append(li);
     
-    fetch("/search?region1=" + region1 + "&region2=" + region2)
+    fetch("se/search?region1=" + region1 + "&region2=" + region2)
     .then(response => response.json())
     .then(data => {
+      console.log(data);
       const resultList = document.getElementById("result-list");
       resultList.innerHTML = "";
-      const li = document.createElement("li");
-      li.innerHTML = "test";
-      resultList.append(li);
       data.forEach(element => {
         const li = document.createElement("li");
-        li.innerHTML = element;
+        li.innerHTML = element['idS'];
         resultList.append(li);
       });
     })
