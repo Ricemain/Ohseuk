@@ -1,8 +1,9 @@
 {
   "dependencies": {
+    "ejs": "^3.1.10",
     "express": "^4.19.2",
-    "mysql2": "^3.10.0",
-    "nodemon": "^3.1.2"
+    "mysql": "^2.18.1",
+    "mysql2": "^3.10.0"
   },
   "name": "silverlink",
   "version": "1.0.0",
@@ -13,5 +14,9 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "dotenv": "^16.4.5",
+    "nodemon": "^3.1.2"
+  }
 }
