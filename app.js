@@ -36,9 +36,6 @@ app.get('/list', function (req, res) {
 
 
 
-// app.get('/insert', function (req, res) {
-//     res.send('test')
-// });
 
 
 
