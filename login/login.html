@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sliverlink</title>
+</head>
+<body>
+    <div class="login">
+        <h1>로그인</h1>
+        
+        <input type="text" name="id" placeholder="아이디" required id="id">
+        <input type="password" name="password" placeholder="비밀번호" required id="pw">
+        <button onclick="login();">로그인</button>
+        
+    </div>
+    
+
+    <ul id="result-list"></ul>
+</body>
+</html>
+<script>    
+    console.log(id);
+    function login(){
+        var id = document.getElementById('id').value;
+        var pw = document.getElementById('pw').value;   
+        console.log(id);
+        if(id == ''){
+            alert('아이디를 입력해주세요.');
+            return;
+        }
+        if(password == ''){
+            alert('비밀번호를 입력해주세요.');
+            return;
+        }
+        const resultList = document.getElementById("result-list");
+        resultList.innerHTML = "";
+        
+        
+        fetch("/login/user?id=" + id + "&password=" + pw)
+        .then(response => response.json())
+        .then(data => {
+            resultList.innerHTML = "";
+            data.forEach(item => {
+                const li = document.createElement("li");
+                li.innerHTML = element['userID'];
+                resultList.append(li);
+            });
+        });
+        
+    }
+</script>

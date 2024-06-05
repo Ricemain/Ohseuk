@@ -49,11 +49,21 @@ function getResultBySearch(region1, region2, puInstitution1, serviceKey, online,
     });
 }
 
+function getUserByIdPw(id, pw, callback) {
+    const sql = 'SELECT * FROM user WHERE userID = ? AND userPassword = ?';
+    connection.query(sql, [id, pw], (err, result, fields) => {
+        if(err) return callback(err);
+        callback(null, result);
+    });
+}
+
 function getConnection() {
     return connection;
 }
 
 module.exports = { 
     getResultBySearch,
+    getUserByIdPw,
     getConnection
+    
 }

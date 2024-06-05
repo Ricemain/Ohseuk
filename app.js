@@ -16,6 +16,10 @@ app.get('refinesearch/script.js', (req, res) => {
     res.sendFile(__dirname + 'refinesearch/script.js')
 })
 
+app.get('/login/login',(req,res)=>{
+    res.sendFile(__dirname + '/login/login.html');
+});
+
 app.get('/refinesearch/se/search',(req,res)=>{
     const region1 = req.query.region1;
     const region2 = req.query.region2;
@@ -26,6 +30,16 @@ app.get('/refinesearch/se/search',(req,res)=>{
     const gender = req.query.gender;
 
     db.getResultBySearch(region1, region2, puInstitution1, serviceKey, online, age, gender, (err, result) => {
+        if(err) return res.status(500).send('DB Error');
+        res.json(result);
+    });
+});
+
+app.get('/login/login/user',(req,res)=>{
+    const id = req.query.id;
+    const pw = req.query.pw;
+
+    db.getUserByIdPw(id, pw, (err, result) => {
         if(err) return res.status(500).send('DB Error');
         res.json(result);
     });
