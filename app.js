@@ -19,11 +19,20 @@ app.get('refinesearch/script.js', (req, res) => {
 app.get('/refinesearch/se/search',(req,res)=>{
     const region1 = req.query.region1;
     const region2 = req.query.region2;
-    db.getResultByRegion(region1, region2, (err, result) => {
+    const puInstitution1 = req.query.puInstitution1;
+    const serviceKey = req.query.serviceKey;
+    const online = req.query.online;
+    const age = req.query.age;
+    const gender = req.query.gender;
+
+    db.getResultBySearch(region1, region2, puInstitution1, serviceKey, online, age, gender, (err, result) => {
         if(err) return res.status(500).send('DB Error');
         res.json(result);
     });
 });
+
+
+
 
 
 app.get('/list', function (req, res) {

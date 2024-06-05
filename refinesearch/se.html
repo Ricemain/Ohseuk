@@ -37,7 +37,7 @@
       <div class="text">지역</div>
       <div class="select-wrapper ">
         <select class="dropdown1" id="region1" onclick="serchRegion(this.value);">
-          <option value="">시/도</option>
+          <option value="all">시/도</option>
         </select>
       </div>
       <div class="select-wrapper ">
@@ -47,32 +47,79 @@
       </div>
       <div class="text institution-name">기관명</div>
       <div class="select-wrapper">
-        <select class="dropdown3">
-          <option value="">선택하세요</option>
-          <option value="1">무슨</option>
-          <option value="2">기관명</option>
-          <option value="3">??</option>
+        <select class="dropdown3" id="puInstitution1">
+          <option value="all">선택하세요</option>
+          <option value="all">지자체</option>
+          <option value="고용노동부 고령사회인력정책과">고용노동부 고령사회인력정책과</option>
+          <option value="교육부 평생학습지원과">교육부 평생학습지원과</option>
+          <option value="국가보훈부 보상정책과">국가보훈부 보상정책과</option>
+          <option value="국가보훈부 복지정책과">국가보훈부 복지정책과</option>
+          <option value="국토교통부 공공주택정책과">국토교통부 공공주택정책과</option>
+          <option value="국토교통부 광역교통경제과">국토교통부 광역교통경제과</option>
+          <option value="국토교통부 주택기금과">국토교통부 주택기금과</option>
+          <option value="금융위원회 금융정책과">금융위원회 금융정책과</option>
+          <option value="문화체육관광부 도서관정책기획단">문화체육관광부 도서관정책기획단</option>
+          <option value="문화체육관광부 지역문화정책과">문화체육관광부 지역문화정책과</option>
+          <option value="보건복지부 건강정책과">보건복지부 건강정책과</option>
+          <option value="보건복지부 건강증진과">보건복지부 건강증진과</option>
+          <option value="보건복지부 국민연금정책과">보건복지부 국민연금정책과</option>
+          <option value="보건복지부 기초연금과">보건복지부 기초연금과</option>
+          <option value="보건복지부 기초의료보장과">보건복지부 기초의료보장과</option>
+          <option value="보건복지부 노인건강과">보건복지부 노인건강과</option>
+          <option value="보건복지부 노인정책과">보건복지부 노인정책과</option>
+          <option value="보건복지부 노인지원과">보건복지부 노인지원과</option>
+          <option value="보건복지부 요양보험제도과">보건복지부 요양보험제도과</option>
+          <option value="보건복지부 장애인자립기반과">보건복지부 장애인자립기반과</option>
+          <option value="보건복지부 질병정책과">보건복지부 질병정책과</option>
+          <option value="산림청 산림자원과">산림청 산림자원과</option>
+          <option value="중소벤처기업부 창업생태계과">중소벤처기업부 창업생태계과</option>
+          <option value="질병관리청 예방접종관리과">질병관리청 예방접종관리과</option>
+          <option value="통일부 교육기획과">통일부 교육기획과</option>
         </select>
       </div>
     </div>
   
     <div class="row">
       <div class="text">키워드</div>
-
       <div class="select-wrapper">
-        <select class="dropdown4">
-          <option value="">선택하세요</option>
-          <option value="1">아</option>
-          <option value="2">몰</option>
-          <option value="3">랑</option>
+        <select class="dropdown4" id="serviceKey">
+          <option value="all">선택하세요</option>
+          <option value="보육">보육</option>
+          <option value="다자녀">다자녀</option>
+          <option value="입양·위탁">입양·위탁</option>
+          <option value="지자체 복지서비스">지자체 복지서비스</option>
+          <option value="보훈대상자">보훈대상자</option>
+          <option value="법률">법률</option>
+          <option value="안전·위기">안전·위기</option>
+          <option value="문화·여가">문화·여가</option>
+          <option value="정신건강">정신건강</option>
+          <option value="보호·돌봄">보호·돌봄</option>
+          <option value="생활지원">생활지원</option>
+          <option value="서민금융">서민금융</option>
+          <option value="저소득">저소득</option>
+          <option value="장애인">장애인</option>
+          <option value="한부모·조손">한부모·조손</option>
+          <option value="교육">교육</option>
+          <option value="일자리">일자리</option>
+          <option value="신체건강">신체건강</option>
+          <option value="임신·출산">임신·출산</option>
+          <option value="영유아">영유아</option>
+          <option value="아동">아동</option>
+          <option value="중앙부처 복지사업">중앙부처 복지사업</option>
+          <option value="다문화·탈북민">다문화·탈북민</option>
+          <option value="주거">주거</option>
+          <option value="청소년">청소년</option>
+          <option value="청년">청년</option>
+          <option value="중장년">중장년</option>
+          <option value="노년">노년</option>          
         </select>
       </div>
       <div class="text institution-name">온라인신청여부</div>
       <div class="select-wrapper">
-        <select class="dropdown5">
-          <option value="">선택하세요</option>
-          <option value="1">예스</option>
-          <option value="2">노우</option>
+        <select class="dropdown5" id="online">
+          <option value="all">선택하세요</option>
+          <option value="true">예</option>
+          <option value="false">아니오</option>
         </select>
       </div>
     </div>
@@ -80,22 +127,22 @@
     <div class="row">
       <div class="text">나이</div>
       <div class="select-wrapper">
-        <select class="dropdown6">
-          <option value=""></option>
-          <option value="1">~20세</option>
-          <option value="2">~40세</option>
-          <option value="3">~60세</option>
+        <select class="dropdown6" id="age">
+          <option value="all">나이선택</option>
+          <option value="1">40세 이상</option>
+          <option value="2">60세 이상</option>
+          <option value="3">80세 이상</option>
         </select>
       </div>
       <div class="text">성별</div>
       <div class="select-wrapper">
-        <select class="dropdown7">
-          <option value=""></option>
-          <option value="1">남성</option>
-          <option value="2">여성</option>
+        <select class="dropdown7" id="gender">
+          <option value="all">성별선택</option>
+          <option value="all">남성</option>
+          <option value="female">여성</option>
         </select>
       </div>
-      <div class="text">기타</div>
+      <!-- <div class="text">기타</div>
       <div class="select-wrapper">
         <select class="dropdown8">
           <option value=""></option>
@@ -103,7 +150,7 @@
           <option value="2">통기타</option>
           <option value="3">비타민</option>
         </select>
-      </div>
+      </div> -->
     </div>
     
 
@@ -156,6 +203,9 @@
             "울산광역시" : [ "남구", "동구", "북구", "중구", "울주군" ],
             "제주특별자치도" : [ "서귀포시", "제주시" ]
   }
+
+
+
   var region1Element = document.getElementById("region1")
   var region2Element = document.getElementById("region2")
   for(var key in area) {
@@ -180,14 +230,25 @@
     }
   }
 
+ 
+
+
   function search() {
     var region1 = document.getElementById("region1").value;
     var region2 = document.getElementById("region2").value;
+    var puInstitution1 = document.getElementById("puInstitution1").value;
+    var serviceKey = document.getElementById("serviceKey").value;
+    var online = document.getElementById("online").value;
+    var age = document.getElementById("age").value;
+    var gender = document.getElementById("gender").value;
+    console.log(gender);  // deug
+
+    
 
     const resultList = document.getElementById("result-list");
     resultList.innerHTML = "";
     
-    fetch("se/search?region1=" + region1 + "&region2=" + region2)
+    fetch("se/search?region1=" + region1 + "&region2=" + region2 + "&puInstitution1=" + puInstitution1 + "&serviceKey=" + serviceKey + "&online=" + online + "&age=" + age + "&gender=" + gender)
     .then(response => response.json())
     .then(data => {
       resultList.innerHTML = "";
@@ -198,5 +259,10 @@
       });
     })
     .catch(error => console.error('Error:', error));
+
+    
   }
+
+  
+
 </script>
