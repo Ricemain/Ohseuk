@@ -16,37 +16,35 @@
     </div>
     
 
-    <ul id="result-list"></ul>
+    <ul id="result-list">하이</ul>
 </body>
 </html>
 <script>    
-    console.log(id);
     function login(){
         var id = document.getElementById('id').value;
-        var pw = document.getElementById('pw').value;   
-        console.log(id);
-        if(id == ''){
-            alert('아이디를 입력해주세요.');
-            return;
-        }
-        if(password == ''){
-            alert('비밀번호를 입력해주세요.');
-            return;
-        }
+        // var pw = document.getElementById('pw').value;   
+        
+        
         const resultList = document.getElementById("result-list");
         resultList.innerHTML = "";
         
         
-        fetch("/login/user?id=" + id + "&password=" + pw)
+        fetch("login/user?id=" + id)
         .then(response => response.json())
         .then(data => {
             resultList.innerHTML = "";
             data.forEach(item => {
                 const li = document.createElement("li");
-                li.innerHTML = element['userID'];
+                li.innerHTML = element['userGender'];
                 resultList.append(li);
             });
+        })
+        .catch(error => {
+            resultList.innerHTML = "에러가 발생했습니다.";
         });
         
     }
+
+
+
 </script>
