@@ -2,74 +2,75 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up</title>
 </head>
 <body>
-        <label for="userID">userID: </label><input type="text" name="userID" />
-        <br/>
-        <label for="userName">userName: </label><input type="text" name="userName" />
-        <br/>
-        <label for="userPassword">userPassword: </label><input type="password" name="userPassword" />
-        <br/>
-        <div class="text">지역</div>
-            <div class="select-wrapper ">
-            <select class="dropdown1" id="region1" onclick="serchRegion(this.value);">
-                <option value="all">시/도</option>
+    <label for="userID">userID: </label><input type="text" name="userID" />
+    <br/>
+    <label for="userName">userName: </label><input type="text" name="userName" />
+    <br/>
+    <label for="userPassword">userPassword: </label><input type="password" name="userPassword" />
+    <br/>
+    <div class="text">지역</div>
+    <div class="select-wrapper ">
+      <select class="dropdown1" id="region1" onclick="serchRegion(this.value);">
+        <option value="all">시/도</option>
+      </select>
+    </div>
+  <div class="select-wrapper ">
+    <select class="dropdown2" id="region2">
+      <option value="">구/동</option>
+    </select>
+  </div>
+  <div class="text">성별</div>
+  <div class="select-wrapper">
+      <select class="dropdown7" id="gender">
+          <option value="all">성별선택</option>
+          <option value="all">남성</option>
+          <option value="female">여성</option>
+      </select>
+  </div>
+  <br/>
+  <label for="userAge">userAge: </label><input type="text" name="userAge" />
+  <br/>
+  <div class="row">
+      <div class="text">키워드</div>
+      <div class="select-wrapper">
+        <select class="dropdown4" id="serviceKey">
+          <option value="all">선택하세요</option>
+          <option value="보육">보육</option>
+          <option value="다자녀">다자녀</option>
+          <option value="입양·위탁">입양·위탁</option>
+          <option value="지자체 복지서비스">지자체 복지서비스</option>
+          <option value="보훈대상자">보훈대상자</option>
+          <option value="법률">법률</option>
+          <option value="안전·위기">안전·위기</option>
+          <option value="문화·여가">문화·여가</option>
+          <option value="정신건강">정신건강</option>
+          <option value="보호·돌봄">보호·돌봄</option>
+          <option value="생활지원">생활지원</option>
+          <option value="서민금융">서민금융</option>
+          <option value="저소득">저소득</option>
+          <option value="장애인">장애인</option>
+          <option value="한부모·조손">한부모·조손</option>
+          <option value="교육">교육</option>
+          <option value="일자리">일자리</option>
+          <option value="신체건강">신체건강</option>
+          <option value="임신·출산">임신·출산</option>
+          <option value="영유아">영유아</option>
+          <option value="아동">아동</option>
+          <option value="중앙부처 복지사업">중앙부처 복지사업</option>
+          <option value="다문화·탈북민">다문화·탈북민</option>
+          <option value="주거">주거</option>
+          <option value="청소년">청소년</option>
+          <option value="청년">청년</option>
+          <option value="중장년">중장년</option>
+          <option value="노년">노년</option>          
         </select>
-        </div>
-        <div class="select-wrapper ">
-            <select class="dropdown2" id="region2">
-                <option value="">구/동</option>
-        </select>
-        </div>
-        <div class="text">성별</div>
-        <div class="select-wrapper">
-            <select class="dropdown7" id="gender">
-                <option value="all">성별선택</option>
-                <option value="all">남성</option>
-                <option value="female">여성</option>
-            </select>
-        </div>
-        <br/>
-        <label for="userAge">userAge: </label><input type="text" name="userAge" />
-        <br/>
-        <div class="row">
-            <div class="text">키워드</div>
-            <div class="select-wrapper">
-              <select class="dropdown4" id="serviceKey">
-                <option value="all">선택하세요</option>
-                <option value="보육">보육</option>
-                <option value="다자녀">다자녀</option>
-                <option value="입양·위탁">입양·위탁</option>
-                <option value="지자체 복지서비스">지자체 복지서비스</option>
-                <option value="보훈대상자">보훈대상자</option>
-                <option value="법률">법률</option>
-                <option value="안전·위기">안전·위기</option>
-                <option value="문화·여가">문화·여가</option>
-                <option value="정신건강">정신건강</option>
-                <option value="보호·돌봄">보호·돌봄</option>
-                <option value="생활지원">생활지원</option>
-                <option value="서민금융">서민금융</option>
-                <option value="저소득">저소득</option>
-                <option value="장애인">장애인</option>
-                <option value="한부모·조손">한부모·조손</option>
-                <option value="교육">교육</option>
-                <option value="일자리">일자리</option>
-                <option value="신체건강">신체건강</option>
-                <option value="임신·출산">임신·출산</option>
-                <option value="영유아">영유아</option>
-                <option value="아동">아동</option>
-                <option value="중앙부처 복지사업">중앙부처 복지사업</option>
-                <option value="다문화·탈북민">다문화·탈북민</option>
-                <option value="주거">주거</option>
-                <option value="청소년">청소년</option>
-                <option value="청년">청년</option>
-                <option value="중장년">중장년</option>
-                <option value="노년">노년</option>          
-              </select>
-            </div>
+      </div>
 
-        <button onclick="singup();">Sign Up</button>
+      <button onclick="singup();">Sign Up</button>
 </body>
 </html>
 
@@ -130,6 +131,7 @@ var area = {
     var gender = document.getElementById('gender').value;
     var userAge = document.getElementsByName('userAge')[0].value
     var serviceKey = document.getElementById('serviceKey').value
+    console.log(userID);
 
     fetch("singup/singUpProc?userID=" + userID + "&userName=" + userName + "&userPassword=" + userPassword + "&region1=" + region1 + "&region2=" + region2 + "&gender=" + gender + "&userAge=" + userAge + "&serviceKey=" + serviceKey)
     .then(response => response.json())

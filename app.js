@@ -24,8 +24,8 @@ app.get('/refinesearch/se',(req,res)=>{ //검색페이지
 app.get('/login/login',(req,res)=>{ //로그인페이지
     res.sendFile(__dirname + '/login/login.html');
 });
-app.get('/login/singUp',(req,res)=>{ //회원가입페이지
-    res.sendFile(__dirname + '/login/singUp.html');
+app.get('/login/singup',(req,res)=>{ //회원가입페이지
+    res.sendFile(__dirname + '/login/singup.html');
 });
 app.get('/mainPage/mainNode',(req,res)=>{ //메인페이지
     res.sendFile(__dirname + '/mainPage/mainNode.html');
@@ -71,7 +71,7 @@ app.get('/list', function (req, res) {
     });
 });
 
-app.get('login/singup/singUpProc',(req,res)=>{
+app.get('/login/singup/singUpProc',(req,res)=>{
     const userID = req.query.userID;
     const username = req.query.userName;
     const userPassword = req.query.userPassword;
