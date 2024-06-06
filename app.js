@@ -4,39 +4,35 @@ var db = require('./database.js');
 app.use(express.static('public'));
 const path = require('path');
 const cookieParser = require('cookie-parser');
+var bodyParser = require('body-parser');
+
+app.use(bodyParser.urlencoded({ extended: false }) );
 
 const USER_COOKIE_KEY = 'user';
 
 app.use(cookieParser());
 
 
-
-
-
-
 app.listen(8080, () => {
     console.log('Server is running on http://localhost:8080');
 });
 
-app.get('/refinesearch/se',(req,res)=>{
-    res.sendFile(__dirname + '/refinesearch/se.html');
+//페이지 경로 설정
+app.get('/refinesearch/se',(req,res)=>{ //검색페이지
+    res.sendFile(__dirname + '/refinesearch/se.html'); 
 });
-
-app.get('/login/login',(req,res)=>{
+app.get('/login/login',(req,res)=>{ //로그인페이지
     res.sendFile(__dirname + '/login/login.html');
 });
-
-
-app.get('/mainPage/mainNode',(req,res)=>{
+app.get('/mainPage/mainNode',(req,res)=>{ //메인페이지
     res.sendFile(__dirname + '/mainPage/mainNode.html');
 });
-app.get('/mainPage/results',(req,res)=>{
+app.get('/mainPage/results',(req,res)=>{ //결과페이지
     res.sendFile(__dirname + '/mainPage/result.html');
 });
-app.get('/mainPage/main',(req,res)=>{
-    res.sendFile(__dirname + '/mainPage/script.js');
+app.get('/recommend/recommendPage',(req,res)=>{ //추천페이지
+    res.sendFile(__dirname + '/recommend/recommendPage.html');
 });
-
 
 app.get('/refinesearch/se/search',(req,res)=>{
     const region1 = req.query.region1;
