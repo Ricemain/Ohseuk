@@ -6,7 +6,6 @@
     <title>sliverlink</title>
 </head>
 <body>
-    <div class="login">
         <h1>로그인</h1>
         
         <input type="text" name="id" placeholder="아이디" required id="id">
@@ -14,7 +13,6 @@
         <button onclick="login();">로그인</button>
         
     </div>
-    
 
     <ul id="result-list">하이</ul>
 </body>
@@ -22,28 +20,33 @@
 <script>    
     function login(){
         var id = document.getElementById('id').value;
-        // var pw = document.getElementById('pw').value;   
-        
-        
+        var pw = document.getElementById('pw').value;
         const resultList = document.getElementById("result-list");
         resultList.innerHTML = "";
+
+        if(id == "" || pw == ""){
+            resultList.innerHTML = "아이디와 비밀번호를 입력해주세요.";
+            return;
+        }
         
-        
-        fetch("login/user?id=" + id)
+        fetch("login/user?id=" +id + "&pw=" + pw)
         .then(response => response.json())
         .then(data => {
+            if(data.length == 0){
+                alert("아이디와 비밀번호를 확인해주세요.");
+            }
             resultList.innerHTML = "";
             data.forEach(item => {
                 const li = document.createElement("li");
-                li.innerHTML = element['userGender'];
-                resultList.append(li);
+                li.innerHTML = item['userID'];
+                resultList.appendChild(li);
+                location.href = "http://localhost:8080/mainPage/mainNode";
             });
         })
-        .catch(error => {
-            resultList.innerHTML = "에러가 발생했습니다.";
-        });
-        
+        .catch(error => { resultList.innerHTML = "에러가 발생했습니다."; });    
     }
+
+    
 
 
 

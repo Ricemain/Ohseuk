@@ -1,8 +1,18 @@
 const express = require('express');
 const app = express();
 var db = require('./database.js');
-
 app.use(express.static('public'));
+const path = require('path');
+const cookieParser = require('cookie-parser');
+
+const USER_COOKIE_KEY = 'user';
+
+app.use(cookieParser());
+
+
+
+
+
 
 app.listen(8080, () => {
     console.log('Server is running on http://localhost:8080');
@@ -14,6 +24,17 @@ app.get('/refinesearch/se',(req,res)=>{
 
 app.get('/login/login',(req,res)=>{
     res.sendFile(__dirname + '/login/login.html');
+});
+
+
+app.get('/mainPage/mainNode',(req,res)=>{
+    res.sendFile(__dirname + '/mainPage/mainNode.html');
+});
+app.get('/mainPage/results',(req,res)=>{
+    res.sendFile(__dirname + '/mainPage/result.html');
+});
+app.get('/mainPage/main',(req,res)=>{
+    res.sendFile(__dirname + '/mainPage/script.js');
 });
 
 
@@ -35,12 +56,14 @@ app.get('/refinesearch/se/search',(req,res)=>{
 
 app.get('/login/login/user',(req,res)=>{
     const id = req.query.id;
+    const pw = req.query.pw;
 
-    db.getUserGender(id, (err, result) => {
+    db.getUserLogin(id, pw, (err, result) => {
         if(err) return res.status(500).send('DB Error');
         res.json(result);
     });
 });
+
 
 
 

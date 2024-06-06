@@ -1,3 +1,5 @@
+const e = require('express');
+const { request } = require('express');
 const mysql = require('mysql2');
 const connection = mysql.createConnection({
     host: 'localhost',
@@ -49,21 +51,23 @@ function getResultBySearch(region1, region2, puInstitution1, serviceKey, online,
     });
 }
 
-function getUserByIdPw(id, callback) {
-    const sql = 'SELECT * FROM user WHERE userID = ?';
-    connection.query(sql, [id], (err, result, fields) => {
+function getUserLogin(id, pw, callback) {
+    var sql = 'SELECT * FROM user WHERE userID = ? AND userPassword = ?';
+    connection.query(sql, [id, pw], (err, result, fields) => {
+        if(err) return callback(err);
+        else if(result.length == 0) return callback(null, {result: 'fail'});
+        else callback(null, result);
+    }); 
+}
+
+function getUser(username, callback) {
+    var sql = 'SELECT * FROM user WHERE userID = ?';
+    connection.query(sql, [username], (err, result, fields) => {
         if(err) return callback(err);
         callback(null, result);
     });
 }
 
-function getUserGender(id, callback) {
-    var sql = 'SELECT * FROM user userID = ?';
-    connection.query(sql, [id], (err, result, fields) => {
-        if(err) return callback(err);
-        callback(null, result);
-    }); 
-}
     
 
 function getConnection() {
@@ -72,7 +76,7 @@ function getConnection() {
 
 module.exports = { 
     getResultBySearch,
-    getUserByIdPw,
     getConnection,
-    getUserGender
+    getUserLogin,
+    getUser
 }
