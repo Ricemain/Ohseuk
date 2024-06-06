@@ -1,0 +1,210 @@
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #fff;
+  color: #333;
+}
+header {
+  padding: 8px;
+  text-align: center;
+  background-color: #F0EFEF; 
+}
+.header {
+  text-align: left;
+}
+header h1 {
+  margin: 0;
+  font-size: 24px; 
+}
+nav {
+  border-bottom: 2px solid #908a8a; 
+  padding: 15px 0;
+  text-align: center;
+  background-color: #F0EFEF; 
+}
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+nav ul li {
+  display: inline;
+  margin-right: 20px;
+}
+nav ul li a {
+  color: #333; 
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 18px; 
+}
+nav ul li a:hover {
+  text-decoration: underline;
+}
+#loginButton {
+  padding: 12px 20px; 
+  border-radius: 20px; 
+  border: 1px solid #31B3DC; 
+  background-color: #31B3DC; 
+  color: #fff; 
+  font-size: 15px; 
+  cursor: pointer; 
+  transition: background-color 0.3s ease; 
+  float: right; 
+  margin-right: 20px;
+  padding-top: 10px; 
+  margin-top: -20px;
+}
+#loginButton:hover {
+  background-color: #4682B4;
+}
+
+
+.search {
+  width: 60%; 
+  margin: 20px auto; 
+  margin-top: 120px;
+  padding: 10px; 
+  border-radius: 20px; 
+  border: 2px solid #0075FF; 
+  position: relative; 
+}
+.search input[type="text"] {
+  width: calc(100% - 110px); 
+  padding: 10px;
+  border: none; 
+  font-size: 16px; 
+  border-radius: 20px;
+  outline: none;
+}
+.search button {
+  position: absolute; 
+  right: 10px; 
+  top: 50%; 
+  transform: translateY(-50%); 
+  padding: 10px 20px; 
+  border: none;
+  border-radius: 20px; 
+  background-color: #31B3DC; 
+  color: #fff; 
+  font-size: 16px; 
+  cursor: pointer; 
+  transition: background-color 0.3s ease; 
+}
+.search button:hover {
+  background-color: #0056b3; 
+}
+
+.small {
+  position: absolute;
+  top: 130px;
+  left: 280px;
+  font-size: 15px;
+  font-weight: lighter;
+}
+
+.big {
+  position: absolute;
+  top: 154px;
+  left: 280px;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+/*여기서 부터*/
+
+
+.container {
+  display: flex;
+  position: relative;
+}
+
+.box1 {
+  width: 45%;
+  height: 500px; 
+  margin: 20px auto;
+  padding: 10px;
+  border-radius: 20px;
+  border: 1px solid #7D7D7D;
+  position: relative;
+  margin-left: 300px;
+  overflow-y: scroll; 
+}
+.box1::-webkit-scrollbar {
+  display: none; 
+}
+
+.result-card {
+  border-bottom: 1px solid #ccc;
+  padding: 10px 0;
+}
+.result-card:hover {
+  cursor: pointer;
+}
+
+.result-card h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: bold;
+}
+.result-card p {
+  margin: 5px 0 0;
+  font-size: 14px;
+  color: #555;
+}
+
+.box2 {
+  width: 12%;
+  height: 250px; 
+  margin: 20px auto;
+  margin-right: 300px;
+  padding: 10px;
+  border-radius: 20px;
+  border: 1px solid #7D7D7D;
+  position: relative;
+  margin-left: 20px;
+  overflow-y: scroll; 
+
+}
+
+.box2::-webkit-scrollbar {
+  display: none; 
+}
+
+
+.box2 ul {
+  list-style-type: none;
+  padding: 0;
+}
+.box2 ul li {
+  padding: 5px;
+  border-bottom: 1px solid #ccc;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.box2 ul li .deleteButton {
+  background-color: transparent;
+  border: none;
+  color: #000000;
+  font-size: 16px;
+  cursor: pointer;
+}
+.box2 ul li .deleteButton:hover {
+  color: #cc0000;
+}
+
+.box2 h3 {
+  margin: 0;
+  padding: 10px 0;
+  font-size: 18px;
+  text-align: center;
+
+  border-radius: 20px 20px 0 0;
+}
+.box2 hr {
+  margin: 0;
+  border: none;
+  border-top: 1px solid #ccc;
+}
