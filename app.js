@@ -24,6 +24,9 @@ app.get('/refinesearch/se',(req,res)=>{ //검색페이지
 app.get('/login/login',(req,res)=>{ //로그인페이지
     res.sendFile(__dirname + '/login/login.html');
 });
+app.get('/login/singUp',(req,res)=>{ //회원가입페이지
+    res.sendFile(__dirname + '/login/singUp.html');
+});
 app.get('/mainPage/mainNode',(req,res)=>{ //메인페이지
     res.sendFile(__dirname + '/mainPage/mainNode.html');
 });
@@ -60,11 +63,6 @@ app.get('/login/login/user',(req,res)=>{
     });
 });
 
-
-
-
-
-
 app.get('/list', function (req, res) {
     var sql = 'SELECT * FROM user';
     db.getConnection().query(sql, function (err, rows, fields) {
@@ -72,6 +70,25 @@ app.get('/list', function (req, res) {
         else res.send(rows);
     });
 });
+
+app.get('login/singup/singUpProc',(req,res)=>{
+    const userID = req.query.userID;
+    const username = req.query.userName;
+    const userPassword = req.query.userPassword;
+    const region1 = req.query.region1;
+    const region2 = req.query.region2;
+    const gender = req.query.gender;
+    const userAge = req.query.userAge;
+    const serviceKey = req.query.serviceKey;
+    var region = region1 + ' ' + region2;
+
+    db.getSigup(userID, username, userPassword, region, gender, userAge, serviceKey, (err, result) => {
+        if(err) return res.status(500).send('DB Error');
+        res.json(result);
+    });
+});
+
+
 
 
 

@@ -1,11 +1,10 @@
-<!-- signup.html -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
+    <meta charset="UTF-8">
     <title>Sign Up</title>
 </head>
 <body>
-    <form method="POST" action="/signup">
         <label for="userID">userID: </label><input type="text" name="userID" />
         <br/>
         <label for="userName">userName: </label><input type="text" name="userName" />
@@ -70,8 +69,7 @@
               </select>
             </div>
 
-        <button>Sign Up</button>
-    </form>
+        <button onclick="singup();">Sign Up</button>
 </body>
 </html>
 
@@ -121,6 +119,32 @@ var area = {
         });
       }
     }
+  }
+
+  function singup(){
+    var userID = document.getElementsByName('userID')[0].value;
+    var userName = document.getElementsByName('userName')[0].value;
+    var userPassword = document.getElementsByName('userPassword')[0].value;
+    var region1 = document.getElementById('region1').value;
+    var region2 = document.getElementById('region2').value;
+    var gender = document.getElementById('gender').value;
+    var userAge = document.getElementsByName('userAge')[0].value
+    var serviceKey = document.getElementById('serviceKey').value
+
+    fetch("singup/singUpProc?userID=" + userID + "&userName=" + userName + "&userPassword=" + userPassword + "&region1=" + region1 + "&region2=" + region2 + "&gender=" + gender + "&userAge=" + userAge + "&serviceKey=" + serviceKey)
+    .then(response => response.json())
+    .then(data => {
+        if(data.length == 0){
+            alert("회원가입에 실패했습니다.");
+        }
+        if(data.length != 0){
+            alert("회원가입에 성공했습니다.");
+        }
+        location.href = "http://localhost:8080/mainPage/mainNode";
+
+
+        
+    })
   }
 
 
