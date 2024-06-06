@@ -1,0 +1,178 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #fff;
+  color: #333;
+}
+
+header {
+  padding: 8px;
+  text-align: center;
+  background-color: #F0EFEF; 
+}
+
+.header {
+  text-align: left;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 24px; 
+}
+
+nav {
+  border-bottom: 2px solid #908a8a; 
+  padding: 15px 0;
+  text-align: center;
+  background-color: #F0EFEF; 
+}
+
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav ul li {
+  display: inline;
+  margin-right: 20px;
+}
+
+nav ul li a {
+  color: #333; 
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 18px; 
+}
+
+nav ul li a:hover {
+  text-decoration: underline;
+}
+
+#loginButton {
+  padding: 12px 20px; 
+  border-radius: 20px; 
+  border: 1px solid #31B3DC; 
+  background-color: #31B3DC; 
+  color: #fff; 
+  font-size: 15px; 
+  cursor: pointer; 
+  transition: background-color 0.3s ease; 
+  float: right; 
+  margin-right: 20px;
+  padding-top: 10px; 
+  margin-top: -20px;
+}
+
+#loginButton:hover {
+  background-color: #4682B4;
+}
+
+.line {
+  width: 1000px;
+  position: absolute;
+  top: calc(35% - 13px); 
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-bottom: 1px solid #afafaf;
+}
+
+#inputText {
+  position: absolute;
+  top: calc(35% - 83px); 
+  left: calc(50% - 480px);
+  font-size: 45px;
+  color: #AAAAAA;
+}
+
+.inputField {
+  display: none;
+  position: absolute;
+  top: calc(35% - 90px);
+  left: calc(50% - 480px);
+  font-size: 45px;
+  border: none;
+  outline: none;
+  background: transparent;
+  border-bottom: none;
+  padding-bottom: 5px;
+}
+
+/*생성 취소 버튼*/
+.button-container {
+  display: flex;
+  
+  justify-content: center; 
+  margin-top: 350px; 
+}
+
+.produce {
+  padding: 10px 20px;
+  margin: 0 5px;
+  border: none;
+  border-radius: 5px;
+  background-color: #0075FF;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  width: 120px; 
+  height: 40px; 
+  font-weight: bold; 
+}
+
+.produce:hover {
+  background-color: #5ea9ff;
+}
+
+.reset {
+  padding: 10px 20px;
+  margin: 0 5px; 
+  border: none;
+  border-radius: 5px;
+  background-color: #7F7F7F;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  width: 120px; 
+  height: 40px;
+  font-weight: bold; 
+}
+
+.reset:hover {
+  background-color: #a4a4a4;
+}
+
+.custom-button-container {
+  text-align: center; 
+  margin-top: 250px; 
+}
+
+.file-upload-button {
+  padding: 10px 20px;
+  background-color: #0075FF;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  margin-right: 800px;
+}
+
+/* 사진 첨부 */
+.image-preview {
+  display: none;
+  text-align: center;
+
+}
+
+.image-preview img {
+  max-width: 100%;
+  max-height: 300px;
+  margin-bottom: -300px;
+}
+
+.image-preview-container {
+  text-align: center;
+  margin-top: 20px; 
+}
