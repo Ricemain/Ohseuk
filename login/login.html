@@ -37,7 +37,7 @@
                 console.log("id : " + item['userID']);
                 console.log("pw : " + item['userPassword']);
                 window.sessionStorage.setItem("user", item['userID']);
-                location.href = "http://localhost:8080/mainPage/mainNode";
+                location.href = "http://localhost:3000/mainPage/mainNode";
             });
         })
         .catch(error => { resultList.innerHTML = "에러가 발생했습니다."; });    

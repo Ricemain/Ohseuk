@@ -8,11 +8,11 @@
 </head>
 <body>
     <header class="header">
-        <h1><a href="http://localhost:8080/mainPage/mainNode">sliverlink</a></h1>
+        <h1><a href="http://localhost:3000/mainPage/mainNode">sliverlink</a></h1>
     </header>
     <nav>
         <ul>
-            <li><a href="http://localhost:8080/refinesearch/se">복지혜택 검색</a></li>
+            <li><a href="http://localhost:3000/refinesearch/se">복지혜택 검색</a></li>
             <li><a href="#">커뮤니티 기능</a></li>
             <li><a href="#">맞춤형 추천 받기</a></li>
             <li><a href="#">이벤트</a></li>
@@ -68,7 +68,7 @@
         </div>
 
         <div class="extra-button-container">
-          <a href="http://localhost:8080/refinesearch/se">
+          <a href="http://localhost:3000/refinesearch/se">
           <div class="extra-button">
             <img src="/svg/bx-search-alt.svg" alt="Search Icon" class="search-icon">
           </div>
@@ -135,13 +135,13 @@
         id.innerHTML = "로그아웃";
         id.addEventListener('click', function() {
           window.sessionStorage.removeItem("user");
-          location.href = "http://localhost:8080/mainPage/mainNode";
+          location.href = "http://localhost:3000/mainPage/mainNode";
         });
       }
       else{
         id.innerHTML = "로그인";
         id.addEventListener('click', function() {
-          location.href = "http://localhost:8080/login/login";
+          location.href = "http://localhost:3000/login/login";
         });
       }
       

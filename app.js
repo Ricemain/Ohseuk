@@ -13,8 +13,8 @@ const USER_COOKIE_KEY = 'user';
 app.use(cookieParser());
 
 
-app.listen(8080, () => {
-    console.log('Server is running on http://localhost:8080');
+app.listen(3000, () => {
+    console.log('Server is running on http://localhost:3000');
 });
 
 //페이지 경로 설정
