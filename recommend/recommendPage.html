@@ -22,23 +22,38 @@
 </nav>
 
 <div class="small">
-  • 복지혜택 검색 > 세분화 검색 &gt; <span>복지서비스 상세</span>
+  • 맞춤형 추천 &gt; <span>복지 혜택 추천</span>
 </div>
 
 <div class="big">
-  노인맞춤돌봄서비스
+  맞춤형 복지 안내
 </div> 
 
 <div class="content-box">
-  <div class="menu">
-    <div class="menu-item" id="qualificationButton">자격</div>
-    <div class="menu-item" id="methodButton">방법</div>
-    <div class="menu-item" id="reviewButton">리뷰</div>
-  </div>  
   <div class="divider"></div>
+  <h1>회원님을 위해 준비한 맞춤형 복지 정보를 안내 받아보세요</h1>
   <div class="text" id="qualificationInfo"></div>
+  <button id="recommendButton" onclick="recommendButton();">추천 받기</button>
 </div>
 
 <script src="/script/ooold.js"></script>
 </body>
 </html>
+
+<script>
+  function recommendButton(){
+    fetch("recommend/recommend")
+    .then(response => response.json())
+    .then(data => {
+      const qualificationInfo = document.getElementById("qualificationInfo");
+      qualificationInfo.innerHTML = "";
+      data.forEach(item => {
+        const li = document.createElement("li");
+        li.innerHTML = item['qualification'];
+        qualificationInfo.appendChild(li);
+      });
+    })
+    .catch(error => { qualificationInfo.innerHTML = "에러가 발생했습니다."; });
+  }
+
+</script>
