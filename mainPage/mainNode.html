@@ -129,13 +129,13 @@
 
     </div>
 
-
-    <br><br><br>
-    <script src="/script/script.js">
+    <script>
+    
       document.getElementById('searchButton').addEventListener('click', function() {
-        var searchValue = document.getElementById('searchInput').value;
-        window.location.href = '/results?query=' + encodeURIComponent(searchValue);
+        console.log(window.sessionStorage.getItem("user"));
       });
+
     </script>
+    <br><br><br>
 </body>
 </html>

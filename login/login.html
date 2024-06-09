@@ -29,17 +29,14 @@
             return;
         }
         
-        fetch("login/user?id=" +id + "&pw=" + pw)
+        fetch("/login/login/user?id=" +id + "&pw=" + pw)
         .then(response => response.json())
         .then(data => {
-            if(data.length == 0){
-                alert("아이디와 비밀번호를 확인해주세요.");
-            }
             resultList.innerHTML = "";
             data.forEach(item => {
-                const li = document.createElement("li");
-                li.innerHTML = item['userID'];
-                resultList.appendChild(li);
+                console.log("id : " + item['userID']);
+                console.log("pw : " + item['userPassword']);
+                window.sessionStorage.setItem("user", item['userID']);
                 location.href = "http://localhost:8080/mainPage/mainNode";
             });
         })
