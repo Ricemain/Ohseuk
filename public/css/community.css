@@ -135,7 +135,7 @@ nav ul li a:hover {
   display: block;
   width: 45px; 
   height: 45px; 
-  background-image: url('bx-plus-circle.svg'); 
+  background-image: url('/svg/bx-plus-circle.svg'); 
   background-repeat: no-repeat; 
   background-position: center; 
   background-size: 45px; 
@@ -175,7 +175,7 @@ nav ul li a:hover {
   display: block;
   width: 45px; 
   height: 45px; 
-  background-image: url('bx-grid-alt.svg'); 
+  background-image: url('/svg/bx-grid-alt.svg'); 
   background-repeat: no-repeat; 
   background-position: center; 
   background-size: 45px; 
