@@ -73,6 +73,35 @@ function getSigup(userID, username, userPassword, region, gender, userAge, servi
     });
 }
 
+function getRecommend(id, callback) {
+    var sql = 'SELECT * FROM user WHERE userID = ?'
+    var sql1 = 'SELECT * FROM silverlinksearch1 WHERE 1=1';
+    connection.query(sql, [id], (err, result, fields) => {
+        if(err) return callback(err);
+        var userRegion = result[0].userRegion;
+        var userGender = result[0].userGender;
+        var userAge = result[0].userAge;
+        
+        const params = [];
+        if(userRegion != 'all') {
+            sql1 += ' AND regionS IN ("all", ?)';
+            params.push(userRegion);
+        }
+        if(userGender != 'all') {
+            sql1 += ' AND genderS IN ("all", ?)';
+            params.push(userGender);
+        }
+        if(userAge != 'all') {  
+            sql1 += ' AND ageS IN ("0", ?)';
+            params.push(userAge);
+        }
+        connection.query(sql1, params, (err, result, fields) => {
+            if(err) return callback(err);
+            callback(null, result);
+        });
+    });
+}
+
 
 
     
@@ -82,5 +111,6 @@ module.exports = {
     getResultBySearch,
     getConnection,
     getUserLogin,
-    getSigup
+    getSigup,
+    getRecommend
 }

@@ -32,28 +32,53 @@
 <div class="content-box">
   <div class="divider"></div>
   <h1>회원님을 위해 준비한 맞춤형 복지 정보를 안내 받아보세요</h1>
-  <div class="text" id="qualificationInfo"></div>
   <button id="recommendButton" onclick="recommendButton();">추천 받기</button>
 </div>
+
+<ul id="recommend-list"></ul>
 
 <script src="/script/ooold.js"></script>
 </body>
 </html>
 
 <script>
+  var id = document.getElementById("loginButton");
+  if(window.sessionStorage.getItem("user") != null){
+    id.innerHTML = "로그아웃";
+    id.addEventListener('click', function() {
+      window.sessionStorage.removeItem("user");
+      location.href = "http://localhost:8080/mainPage/mainNode";
+    });
+  }
+  else{
+    id.innerHTML = "로그인";
+    id.addEventListener('click', function() {
+      location.href = "http://localhost:8080/login/login";
+    });
+  }
+
   function recommendButton(){
-    fetch("recommend/recommend")
+    var id = window.sessionStorage.getItem("user");
+    console.log(id);
+    const recommendlist = document.getElementById("recommend-list");
+    recommendlist.innerHTML = "";
+
+    fetch("/recommend/recommendPage/recommendButton?id="+id)
     .then(response => response.json())
     .then(data => {
-      const qualificationInfo = document.getElementById("qualificationInfo");
-      qualificationInfo.innerHTML = "";
+      recommendlist.innerHTML = "";
       data.forEach(item => {
         const li = document.createElement("li");
-        li.innerHTML = item['qualification'];
-        qualificationInfo.appendChild(li);
+        li.innerHTML = item['idS'];
+        recommendlist.append(li);
+        
       });
     })
-    .catch(error => { qualificationInfo.innerHTML = "에러가 발생했습니다."; });
+    .catch(error => { console.log("에러가 발생했습니다.");});
   }
+
+
+
+
 
 </script>

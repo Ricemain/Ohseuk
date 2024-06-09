@@ -88,6 +88,15 @@ app.get('/login/singup/singUpProc',(req,res)=>{
     });
 });
 
+app.get('/recommend/recommendPage/recommendButton',(req,res)=>{
+    const id = req.query.id;
+
+    db.getRecommend(id, (err, result) => {
+        if(err) return res.status(500).send('DB Error');
+        res.json(result);
+    });
+});
+
 
 
 
