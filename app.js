@@ -104,6 +104,16 @@ app.get('/recommend/recommendPage/recommendButton',(req,res)=>{
     });
 });
 
+app.get('/community/class/creatPage',(req,res)=>{
+    const inputField = req.query.inputField;
+    const userID = req.query.userID;
+
+    db.getCreatCommunity(inputField, userID, (err, result) => {
+        if(err) return res.status(500).send('DB Error');
+        res.json(result);
+    });
+});
+
 
 
 

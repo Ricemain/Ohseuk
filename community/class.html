@@ -37,7 +37,7 @@
     </div>
     
     <div class="button-container">
-        <button class="produce">생성</button>
+        <button class="produce" onclick="creatPage();">생성</button>
         <button class="reset">취소</button>
     </div> <br><br>
 
@@ -60,9 +60,22 @@
         location.href = "http://localhost:3000/login/login";
       });
     }
+
+function creatPage(){
+    var inputField = document.getElementById("inputField");
+    var userID = window.sessionStorage.getItem("user");
+    console.log(userID);
+    fetch("class/creatPage?inputField="+inputField.value + "&userID=" + userID)
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+        if(data!=null){
+            alert("생성되었습니다.");
+            location.href = "http://localhost:3000/community/community";
+        }
+
+    }).catch(error => { console.log("에러가 발생했습니다.");});
+}
     
-    document.getElementById('searchButton').addEventListener('click', function() {
-      console.log(window.sessionStorage.getItem("user"));
-    });
   
   </script>

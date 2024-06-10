@@ -102,6 +102,14 @@ function getRecommend(id, callback) {
     });
 }
 
+function getCreatCommunity(inputField, userID, callback) {
+    var sql = 'INSERT INTO community (name, userID) VALUES (?, ?)';
+    connection.query(sql, [inputField, userID], (err, result, fields) => {
+        if(err) return callback(err);
+        callback(null, result   );
+    });
+}
+
 
 
     
@@ -112,5 +120,6 @@ module.exports = {
     getConnection,
     getUserLogin,
     getSigup,
-    getRecommend
+    getRecommend,
+    getCreatCommunity
 }
