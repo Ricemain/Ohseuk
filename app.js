@@ -39,6 +39,10 @@ app.get('/recommend/recommendPage',(req,res)=>{ //추천페이지
 app.get('/community/community',(req,res)=>{ //커뮤니티페이지
     res.sendFile(__dirname + '/community/community.html');
 });
+app.get('/community/class',(req,res)=>{ //커뮤니티 만들기 페이지
+    res.sendFile(__dirname + '/community/class.html');
+});
+
 
 app.get('/refinesearch/se/search',(req,res)=>{
     const region1 = req.query.region1;

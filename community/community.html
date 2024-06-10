@@ -8,13 +8,14 @@
 </head>
 <body>
 <header class="header">
-  <h1>sliverlink</h1>
+  <h1><a href="http://localhost:3000/mainPage/mainNode" id="mainlogo">sliverlink</a></h1>
 </header>
 <nav>
+  
   <ul>
-    <li><a href="#">복지혜택 검색</a></li>
-    <li><a href="#">커뮤니티 기능</a></li>
-    <li><a href="#">맞춤형 추천 받기</a></li>
+    <li><a href="http://localhost:3000/refinesearch/se">복지혜택 검색</a></li>
+    <li><a href="http://localhost:3000/community/community">커뮤니티 기능</a></li>
+    <li><a href="http://localhost:3000/recommend/recommendPage">맞춤형 추천 받기</a></li>
     <li><a href="#">이벤트</a></li>
     <li><a href="#">고객센터 문의하기</a></li>
     <button id="loginButton">로그인</button>
@@ -67,3 +68,25 @@
 <script src="/script/community.js"></script>
 </body>
 </html>
+
+<script>
+  var id = document.getElementById("loginButton");
+  if(window.sessionStorage.getItem("user") != null){
+    id.innerHTML = "로그아웃";
+    id.addEventListener('click', function() {
+      window.sessionStorage.removeItem("user");
+      location.href = "http://localhost:3000/mainPage/mainNode";
+    });
+  }
+  else{
+    id.innerHTML = "로그인";
+    id.addEventListener('click', function() {
+      location.href = "http://localhost:3000/login/login";
+    });
+  }
+  
+  document.getElementById('searchButton').addEventListener('click', function() {
+    console.log(window.sessionStorage.getItem("user"));
+  });
+
+</script>

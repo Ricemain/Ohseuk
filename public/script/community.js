@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 function goToAnotherPage() {
-  window.location.href = 'file:///C:/Users/dbsdu/Desktop/cap/%EB%AA%A8%EC%9E%84%EC%83%9D%EC%84%B1/class.html';
+  window.location.href = 'http://localhost:3000/community/class';
 }
 
 

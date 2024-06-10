@@ -20,12 +20,14 @@ header h1 {
   font-size: 24px; 
 }
 
+
 nav {
   border-bottom: 2px solid #908a8a; 
   padding: 15px 0;
   text-align: center;
   background-color: #F0EFEF; 
 }
+
 nav ul {
   list-style-type: none;
   margin: 0;
@@ -60,6 +62,7 @@ nav ul li a:hover {
   padding-top: 10px; 
   margin-top: -20px; 
 }
+
 
 #loginButton:hover {
   background-color: #4682B4; 
