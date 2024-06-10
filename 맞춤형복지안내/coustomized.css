@@ -1,0 +1,147 @@
+body {
+  margin: 0;
+  padding: 0;
+  color: #333; 
+
+}
+
+header {
+  padding: 8px;
+  text-align: center;
+  background-color: #F0EFEF; 
+}
+.header {
+  text-align: left;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 24px; 
+}
+
+nav {
+  border-bottom: 2px solid #908a8a;
+  padding: 15px 0;
+  text-align: center;
+  background-color: #F0EFEF; 
+}
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+nav ul li {
+  display: inline;
+  margin-right: 30px;
+}
+nav ul li a {
+  color: #333; 
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 18px; 
+}
+
+#loginButton {
+  padding: 12px 20px; 
+  border-radius: 20px; 
+  border: 1px solid #31B3DC; 
+  background-color: #31B3DC;
+  color: #fff; 
+  font-size: 15px; 
+  cursor: pointer; 
+  float: right; 
+  margin-right: 20px; 
+  padding-top: 10px; 
+  margin-top: -20px; 
+}
+
+.small {
+  position: absolute;
+  top: 130px;
+  left: 280px;
+  font-size: 15px;
+  font-weight:lighter;
+}
+.small span {
+  color: red; 
+}
+
+.big {
+  position: absolute;
+  top: 154px;
+  left: 280px;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+
+.container {
+  width: 60%;
+  height: 500px;
+  margin: 120px auto 20px; 
+  padding: 20px;
+  background-color: #fff; 
+  border-radius: 20px; 
+  border: 2px solid #b9b9b9; 
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); 
+  text-align: center;
+}
+
+.ment {
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.in_box {
+  width: 80%; 
+  height: 380px; 
+  margin: 20px auto; 
+  background-color: #0077ff28; 
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); 
+  border-radius: 10px; 
+  display: flex; 
+  position: relative; 
+}
+
+.box_section {
+  flex: 1;
+  text-align: center;
+  padding: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.box_section:hover {
+  background-color: #bce1ff; 
+}
+
+#box1 {
+  border-right: 1px dashed #0077ff;
+}
+
+
+.box_section h2 {
+  font-size: 24px;
+  margin-bottom: 5px;
+  margin-top: 70px;
+}
+
+.box_section p {
+  font-size: 26px;
+  margin-top: 70px;
+}
+
+
+.in_box::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  border-left: 1px dashed #0077ff;
+  transform: translateX(-50%);
+}
+
+
+
