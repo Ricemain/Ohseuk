@@ -163,20 +163,12 @@
   </div>
   
   <div class="result">
-    총 1건의 검색결과가 있습니다.
+    총 <span id="count">0</span>건의 검색결과가 있습니다.
   </div>
   <div class="divider"></div>
 
-<div class="small-box">
-  <p class="small-text"><strong>노인 맞춤 돌봄 서비스</strong><br><br>
-  일상생활 영위가 어려운 취약 노인에게 적절한 돌봄 서비스를 제공합니다<br><br></p>
-  <div class="button-small">
-    <button class="details">자세히</button>
-    <button class="application">신청</button>
-  </div>
+  <div id="result-list" class="small-box"></div>
 </div>
-
-<ul id="result-list"></ul>
 
 </body>
 </html>
@@ -255,16 +247,23 @@
     
 
     const resultList = document.getElementById("result-list");
+    const count = document.getElementById("count");
     resultList.innerHTML = "";
     
     fetch("se/search?region1=" + region1 + "&region2=" + region2 + "&puInstitution1=" + puInstitution1 + "&serviceKey=" + serviceKey + "&online=" + online + "&age=" + age + "&gender=" + gender)
     .then(response => response.json())
     .then(data => {
-      resultList.innerHTML = "";
+      count.textContent = data.length;
       data.forEach(element => {
-        const li = document.createElement("li");
-        li.innerHTML = element['idS'];
-        resultList.append(li);
+        const resultBox = document.createElement("div");
+        resultBox.classList.add('small-box');
+        resultBox.innerHTML = `
+                            <h3>${element['idS']}</h3>
+                            <p>${element['supportC']}</p>
+                            <button onclick="viewDetails(${element['numKey']})">자세히</button>
+                            <button onclick="apply(${element['numKey']})">신청하기</button>
+                        `;
+        resultList.appendChild(resultBox);
       });
     })
     .catch(error => console.error('Error:', error));
@@ -286,6 +285,8 @@
     });
   }
 
-  
+  function viewDetails(numKey) {
+            window.location.href = `http://localhost:3000/detailPage/old?numKey=${numKey}`;
+        }
 
 </script>
