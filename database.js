@@ -1,11 +1,18 @@
 const e = require('express');
 const { request } = require('express');
 const mysql = require('mysql2');
-const connection = mysql.createConnection({
+/*const connection = mysql.createConnection({
     host: 'localhost',
     port: '3306',
     user: 'root',
     password: 'ch66a11o22s$',
+    database: 'silverlink'
+});*/
+const connection = mysql.createConnection({
+    host: '34.22.104.200',
+    port: '3306',
+    user: '{ID}',
+    password: '{PASSWORD}',
     database: 'silverlink'
 });
 // const connection = mysql.createConnection({
