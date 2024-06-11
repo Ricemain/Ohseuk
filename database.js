@@ -117,10 +117,82 @@ function getCreatCommunity(inputField, userID, callback) {
     
     connection.query(sql, [inputField, userID], (err, result, fields) => {
         if(err) return callback(err);
-        callback(null, result   );
+        var inputFielduser = result.insertId;
+        connection.query(sql1, [userID], (err, result, fields) => {
+            if(err) return callback(err);
+            if(result[0].communityID == null){
+                var communityID = inputFielduser;
+            }
+            if(result[0].communityID != null) {
+                var communityID = result[0].communityID + ',' + inputFielduser; 
+            }
+            connection.query(sql2, [communityID, userID], (err, result, fields) => {
+                if(err) return callback(err);
+                callback(null, "success");
+            });
+        });
     });
 }
 
+function getCountBySearch(region1, region2, puInstitution1, serviceKey, online, age, gender, callback) {
+    if(region2 == '구/동') region2 = '';
+    var region = region1 + ' ' + region2;
+    region = region.trim();
+
+    var sql = 'SELECT COUNT(*) as count FROM silverlinksearch1 WHERE 1=1';
+    const params = [];
+    if(region != 'all') {
+        sql += ' AND regionS IN ("all", ?)';
+        params.push(region);
+    }
+    if(puInstitution1 != 'all') {
+        sql += ' AND puInstitutionS LIKE CONCAT("%", ?, "%")';
+        params.push(puInstitution1);
+    }
+    if(serviceKey != 'all') {
+        sql += ' AND serviceKeyS LIKE CONCAT("%", ?, "%")';
+        params.push(serviceKey);
+    }
+    if(online != 'all') {
+        sql += ' AND onlineTFS LIKE CONCAT("%", ?, "%")';
+        params.push(online);
+    }
+    if(age != 'all') {
+        sql += ' AND ageS = ?';
+        params.push(age);
+    }
+    if(gender != 'all') {
+        sql += ' AND genderS IN ("all", ?)';
+        params.push(gender);
+    }
+    connection.query(sql, params, (err, result, fields) => {
+        if(err) return callback(err);
+    });
+}
+function getDetailsByNumKey(numKey, callback) {
+var sql = 'SELECT idC, serviceC, applicationC FROM silverlinkcontent1 WHERE numKey = ?';
+connection.query(sql, [numKey], (err, result, fields) => {
+    if(err) return callback(err);
+    callback(null, result[0]);
+});
+}
+
+function getPost(postText, userID, callback) {
+    var sql = 'INSERT INTO communityText (postText, userID, communityID) VALUES (?, ?, ?)';
+    var communityID = '1';
+    connection.query(sql, [postText, userID, communityID], (err, result, fields) => {
+        if(err) return callback(err);
+        callback(null, result);
+    });
+}
+
+function getPostPage(communityID, callback) {
+    var sql = 'SELECT * FROM communityText WHERE communityID = ?';
+    connection.query(sql, [communityID], (err, result, fields) => {
+        if(err) return callback(err);
+        callback(null, result);
+    });
+}
 
 
     
@@ -132,5 +204,9 @@ module.exports = {
     getUserLogin,
     getSigup,
     getRecommend,
-    getCreatCommunity
+    getCreatCommunity,
+    getCountBySearch,
+    getDetailsByNumKey,
+    getPost,
+    getPostPage
 }
