@@ -57,8 +57,20 @@ app.get('/refinesearch/se/search',(req,res)=>{
         if(err) return res.status(500).send('DB Error');
         res.json(result);
     });
+    db.getCountBySearch(region1, region2, puInstitution1, serviceKey, online, age, gender, (err, count) => {
+        if(err) return res.status(500).send('DB Error');
+        res.json({ count });
+    });
 });
 
+app.get('/mainPage/details',(req,res)=>{
+    const numKey = req.query.numKey;
+
+    db.getDetailsByNumKey(numKey, (err, result) => {
+        if(err) return res.status(500).send('DB Error');
+        res.json(result);
+    });
+});
 
 app.get('/login/login/user',(req,res)=>{
     const id = req.query.id;

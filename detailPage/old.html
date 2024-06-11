@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Detail View</title>
+    <link rel="stylesheet" href="/css/oold.css">
+</head>
+<body>
+    <header class="header">
+        <h1>sliverlink</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="#">복지혜택 검색</a></li>
+            <li><a href="#">커뮤니티 기능</a></li>
+            <li><a href="#">맞춤형 추천 받기</a></li>
+            <li><a href="#">이벤트</a></li>
+            <li><a href="#">고객센터 문의하기</a></li>
+            <button id="loginButton">로그인</button>
+        </ul>
+    </nav>
+
+    <div class="small">
+        • 복지혜택 검색 > 세분화 검색 &gt; <span>복지서비스 상세</span>
+    </div>
+
+    <div class="big" id="idC">
+        <!-- 복지 서비스 제목이 들어갈 곳 -->
+    </div>
+
+    <div class="content-box">
+        <div class="menu">
+            <div class="menu-item" id="qualificationButton">지원대상</div>
+            <div class="menu-item" id="methodButton">신청방법</div>
+            <div class="menu-item" id="reviewButton">리뷰</div>
+        </div>
+        <div class="divider"></div>
+        <div class="text" id="qualificationInfo">원하는 항목을 선택하세요.</div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuItems = document.querySelectorAll('.menu-item');
+            const textBox = document.querySelector('.text');
+
+            // URL에서 numKey 추출
+            const params = new URLSearchParams(window.location.search);
+            const numKey = params.get('numKey');
+
+            // 서버로 numKey를 전달하여 데이터 가져오기
+            fetch(`/mainPage/details?numKey=${numKey}`)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('idC').textContent = data.idC;
+                    
+                    const supportC = data.supportC;
+                    const applicationC = data.applicationC;
+
+                    const showQualifications = () => {
+                        const qualificationInfo = document.getElementById("qualificationInfo");
+                        qualificationInfo.innerHTML = `
+                            <p style="text-align: left; font-weight: bold; font-size: 30px;">지원대상</p>
+                            <ul style="list-style-type: disc; padding-left: 20px; text-align: left; font-size: 25px;">
+                                <li>${supportC}</li>
+                            </ul>
+                        `;
+                    };
+
+                    const showMethods = () => {
+                        const qualificationInfo = document.getElementById("qualificationInfo");
+                        qualificationInfo.innerHTML = `
+                            <p style="text-align: left; font-weight: bold; font-size: 30px;">신청방법</p>
+                            <ul style="list-style-type: disc; padding-left: 20px; text-align: left; font-size: 25px;">
+                                <li>${applicationC}</li>
+                            </ul>
+                        `;
+                    };
+
+                    const qualificationButton = document.getElementById("qualificationButton");
+                    qualificationButton.addEventListener("click", showQualifications);
+
+                    const methodButton = document.getElementById("methodButton");
+                    methodButton.addEventListener("click", showMethods);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+
+            menuItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    const text = item.getAttribute('data-text');
+                    textBox.textContent = text;
+
+                    menuItems.forEach(menu => {
+                        menu.classList.remove('active');
+                    });
+
+                    item.classList.add('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
