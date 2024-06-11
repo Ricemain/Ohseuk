@@ -165,11 +165,33 @@
   <div class="result">
     총 <span id="count">0</span>건의 검색결과가 있습니다.
   </div>
-  <div class="divider"></div>
+  <div class = "form-wrapper" style="display: flex; flex-direction: column; ">
+    <form id="silverlinkForm">
+    <div class="divider"></div>
+  
+  
+    <div class="small-box-container" style="
+                display: flex;
+                justify-content: space-between;
+                flex-wrap: wrap;">
 
-  <div id="result-list" class="small-box"></div>
+  <div id="result-list" class="small-box" 
+  style=
+  "display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 400px;
+  margin: 10px;
+  padding: 20px;
+  background-color: #0077ff11;
+  color: rgb(0, 0, 0);
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;">
+  </div>
 </div>
-
+</form>
+</div>
 </body>
 </html>
 
@@ -260,8 +282,8 @@
         resultBox.innerHTML = `
                             <h3>${element['idS']}</h3>
                             <p>${element['supportC']}</p>
-                            <button onclick="viewDetails(${element['numKey']})">자세히</button>
-                            <button onclick="apply(${element['numKey']})">신청하기</button>
+                            <button type="button" class="details" onclick="viewDetails(${element['numKey']})">자세히</button>
+                            <button class="application" onclick="apply(${element['numKey']})">신청하기</button>
                         `;
         resultList.appendChild(resultBox);
       });
@@ -286,6 +308,7 @@
   }
 
   function viewDetails(numKey) {
+          //window.location.href = '/mainPage/details?numKey=${numKey}'
             window.location.href = `http://localhost:3000/detailPage/old?numKey=${numKey}`;
         }
 
