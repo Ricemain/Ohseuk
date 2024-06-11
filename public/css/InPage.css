@@ -1,0 +1,144 @@
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #fff; 
+  color: #333; 
+}
+header {
+  padding: 8px;
+  text-align: center;
+  background-color: #F0EFEF; 
+}
+.header {
+  text-align: left;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 24px; 
+}
+
+
+nav {
+  border-bottom: 2px solid #908a8a; 
+  padding: 15px 0;
+  text-align: center;
+  background-color: #F0EFEF; 
+}
+
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+nav ul li {
+  display: inline;
+  margin-right: 20px;
+}
+nav ul li a {
+  color: #333;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+nav ul li a:hover {
+  text-decoration: underline;
+}
+
+#loginButton {
+  padding: 12px 20px; 
+  border-radius: 20px; 
+  border: 1px solid #31B3DC; 
+  background-color: #31B3DC; 
+  color: #fff; 
+  font-size: 15px; 
+  cursor: pointer; 
+  transition: background-color 0.3s ease; 
+  float: right;
+  margin-right: 20px; 
+  padding-top: 10px; 
+  margin-top: -20px; 
+}
+
+
+#loginButton:hover {
+  background-color: #4682B4; 
+}
+
+
+.big {
+  position: absolute;
+  top: 154px;
+  left: 280px;
+  font-size: 30px;
+  font-weight: bold;
+  margin-top: -15px;
+}
+
+.tabs {
+  display: flex;
+  justify-content: center;
+  border-bottom: 1px solid #ddd;
+  margin-top: 110px;
+}
+
+.tab-button {
+  padding: 10px 20px;
+  cursor: pointer;
+  border: none;
+  background-color: white;
+  font-size: 16px;
+  font-weight: bold;
+  width: 150px; 
+  margin-left: -380px;
+  margin-right: 370px;
+}
+
+
+
+.tab-button.active {
+  border-bottom: 2px solid black;
+}
+
+.content {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 20px;
+}
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+.buttons {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 30px;
+}
+
+.no_dot {
+  list-style-type: none;
+}
+
+
+/* Path: public/css/community.css */
+body { font-family: 'Noto Sans KR', sans-serif; margin: 0; padding: 0; background-color: #f8f9fa; }
+.container { display: flex; }
+.sidebar { width: 250px; background-color: white; padding: 20px; }
+.sidebar h1 { margin-bottom: 10px; }
+.sidebar p { margin-bottom: 20px; }
+.sidebar button { display: block; margin-bottom: 10px; }
+.main-content { flex-grow: 1; padding: 20px; }
+.post img { width: 100%; height: auto; margin-bottom: 20px; }
+.photo-album { background-color: white; padding: 20px; margin-top: 20px; }
+.gallery { display: flex; justify-content: space-between; }
+.gallery img { width: calc(33.333% - 10px); height: auto; margin-bottom: 10px; }
+.inputText { width: 50%; padding: 10px; margin-bottom: 10px; }
+.postButton { padding: 10px; background-color: #007bff; color: white; border: none; cursor: pointer; }

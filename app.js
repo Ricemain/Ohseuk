@@ -14,7 +14,7 @@ app.use(cookieParser());
 
 
 app.listen(3000, () => {
-    console.log('Server is running on http://localhost:3000');
+    console.log('http://localhost:3000');
 });
 
 //페이지 경로 설정
@@ -41,6 +41,9 @@ app.get('/community/community',(req,res)=>{ //커뮤니티페이지
 });
 app.get('/community/class',(req,res)=>{ //커뮤니티 만들기 페이지
     res.sendFile(__dirname + '/community/class.html');
+});
+app.get('/community/InPage',(req,res)=>{ //커뮤니티 페이지
+    res.sendFile(__dirname + '/community/InPage.html');
 });
 
 
@@ -121,6 +124,25 @@ app.get('/community/class/creatPage',(req,res)=>{
     const userID = req.query.userID;
 
     db.getCreatCommunity(inputField, userID, (err, result) => {
+        if(err) return res.status(500).send('DB Error');
+        res.json(result);
+    });
+});
+
+app.get('/community/InPage/post',(req,res)=>{
+    const postText = req.query.postText;
+    const userID = req.query.userID;
+
+    db.getPost(postText, userID, (err, result) => {
+        if(err) return res.status(500).send('DB Error');
+        res.json(result);
+    });
+});
+
+app.get('/community/InPage/getPost',(req,res)=>{
+    const communityID = req.query.communityID;
+
+    db.getPostPage(communityID, (err, result) => {
         if(err) return res.status(500).send('DB Error');
         res.json(result);
     });

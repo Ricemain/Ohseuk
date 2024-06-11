@@ -15,6 +15,13 @@ const connection = mysql.createConnection({
     password: '{PASSWORD}',
     database: 'silverlink'
 });
+// const connection = mysql.createConnection({
+//     host: '34.22.104.200',
+//     port: '3306',
+//     user: '{ID}',
+//     password: '{PASSWORD}',
+//     database: 'silverlink'
+// });
 
 connection.connect();
 
@@ -111,9 +118,26 @@ function getRecommend(id, callback) {
 
 function getCreatCommunity(inputField, userID, callback) {
     var sql = 'INSERT INTO community (name, userID) VALUES (?, ?)';
+    var sql1 = 'SELECT * FROM user WHERE userID = ?'; 
+    var sql2 = 'UPDATE user SET communityID = ?  WHERE userID = ?';
+    
+    
     connection.query(sql, [inputField, userID], (err, result, fields) => {
         if(err) return callback(err);
-        callback(null, result   );
+        var inputFielduser = result.insertId;
+        connection.query(sql1, [userID], (err, result, fields) => {
+            if(err) return callback(err);
+            if(result[0].communityID == null){
+                var communityID = inputFielduser;
+            }
+            if(result[0].communityID != null) {
+                var communityID = result[0].communityID + ',' + inputFielduser; 
+            }
+            connection.query(sql2, [communityID, userID], (err, result, fields) => {
+                if(err) return callback(err);
+                callback(null, "success");
+            });
+        });
     });
 }
 
@@ -160,6 +184,23 @@ connection.query(sql, [numKey], (err, result, fields) => {
 });
 }
 
+function getPost(postText, userID, callback) {
+    var sql = 'INSERT INTO communityText (postText, userID, communityID) VALUES (?, ?, ?)';
+    var communityID = '1';
+    connection.query(sql, [postText, userID, communityID], (err, result, fields) => {
+        if(err) return callback(err);
+        callback(null, result);
+    });
+}
+
+function getPostPage(communityID, callback) {
+    var sql = 'SELECT * FROM communityText WHERE communityID = ?';
+    connection.query(sql, [communityID], (err, result, fields) => {
+        if(err) return callback(err);
+        callback(null, result);
+    });
+}
+
 
     
 
@@ -172,5 +213,7 @@ module.exports = {
     getRecommend,
     getCreatCommunity,
     getCountBySearch,
-    getDetailsByNumKey
+    getDetailsByNumKey,
+    getPost,
+    getPostPage
 }

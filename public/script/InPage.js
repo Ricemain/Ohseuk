@@ -15,21 +15,9 @@ function showTab(tabName) {
 }
 
 
-document.addEventListener("DOMContentLoaded", function() {
-  var myMeetingsButton = document.querySelector('.tab-button.active');
-  if (myMeetingsButton) {
-      myMeetingsButton.classList.remove('active');
-  }
-  document.querySelector('.tab-button').classList.add('active');
-  showTab('myMeetings');
-});
 
 function goToAnotherPage() {
   window.location.href = 'http://localhost:3000/community/class';
-}
-
-function goToInPage() {
-  window.location.href = 'http://localhost:3000/community/InPage';
 }
 
 
