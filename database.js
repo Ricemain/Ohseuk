@@ -1,11 +1,18 @@
 const e = require('express');
 const { request } = require('express');
 const mysql = require('mysql2');
-const connection = mysql.createConnection({
+/*const connection = mysql.createConnection({
     host: 'localhost',
     port: '3306',
     user: 'root',
     password: 'ch66a11o22s$',
+    database: 'silverlink'
+});*/
+const connection = mysql.createConnection({
+    host: '34.22.104.200',
+    port: '3306',
+    user: '{ID}',
+    password: '{PASSWORD}',
     database: 'silverlink'
 });
 
@@ -110,39 +117,10 @@ function getCreatCommunity(inputField, userID, callback) {
     
     connection.query(sql, [inputField, userID], (err, result, fields) => {
         if(err) return callback(err);
-        var inputFielduser = result.insertId;
-        connection.query(sql1, [userID], (err, result, fields) => {
-            if(err) return callback(err);
-            if(result[0].communityID == null){
-                var communityID = inputFielduser;
-            }
-            if(result[0].communityID != null) {
-                var communityID = result[0].communityID + ',' + inputFielduser; 
-            }
-            connection.query(sql2, [communityID, userID], (err, result, fields) => {
-                if(err) return callback(err);
-                callback(null, "success");
-            });
-        });
+        callback(null, result   );
     });
 }
 
-function getPost(postText, userID, callback) {
-    var sql = 'INSERT INTO communityText (postText, userID, communityID) VALUES (?, ?, ?)';
-    var communityID = '1';
-    connection.query(sql, [postText, userID, communityID], (err, result, fields) => {
-        if(err) return callback(err);
-        callback(null, result);
-    });
-}
-
-function getPostPage(communityID, callback) {
-    var sql = 'SELECT * FROM communityText WHERE communityID = ?';
-    connection.query(sql, [communityID], (err, result, fields) => {
-        if(err) return callback(err);
-        callback(null, result);
-    });
-}
 
 
     
@@ -154,7 +132,5 @@ module.exports = {
     getUserLogin,
     getSigup,
     getRecommend,
-    getCreatCommunity,
-    getPost,
-    getPostPage
+    getCreatCommunity
 }
