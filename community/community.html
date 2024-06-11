@@ -23,13 +23,13 @@
 </nav>
 
 <div class="big">
-    커뮤니티
-  </div> 
+  커뮤니티
+</div> 
 
-  <div class="tabs">
-    <button class="tab-button active" onclick="showTab('myMeetings')">내 모임</button>
-    <button class="tab-button" onclick="showTab('meetings')">이벤트/모임</button>
-  </div>
+<div class="tabs">
+  <button class="tab-button active" onclick="showTab('myMeetings')">내 모임</button>
+  <button class="tab-button" onclick="showTab('meetings')">이벤트/모임</button>
+</div>
   
 
 
@@ -37,9 +37,9 @@
   <div id="myMeetings" class="tab-content active">
 
     <div class="buttons">
-        <button class="create-button" onclick="goToAnotherPage()"><span class="button-text">만들기</span></button>
+        <button class="create-button" onclick="goToAnotherPage();"><span class="button-text">만들기</span></button>
 
-      <button class="my-meetings-button"><span class="button2-text">내 모임</span></button>
+      <button class="my-meetings-button" onclick="goToInPage();"><span class="button2-text">내 모임</span></button>
     </div>
 
     <div class="container">
@@ -84,9 +84,5 @@
       location.href = "http://localhost:3000/login/login";
     });
   }
-  
-  document.getElementById('searchButton').addEventListener('click', function() {
-    console.log(window.sessionStorage.getItem("user"));
-  });
 
 </script>

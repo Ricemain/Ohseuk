@@ -62,9 +62,11 @@
     }
 
 function creatPage(){
+  
     var inputField = document.getElementById("inputField");
     var userID = window.sessionStorage.getItem("user");
     console.log(userID);
+    
     fetch("class/creatPage?inputField="+inputField.value + "&userID=" + userID)
     .then(response => response.json())
     .then(data => {
@@ -73,9 +75,13 @@ function creatPage(){
             alert("생성되었습니다.");
             location.href = "http://localhost:3000/community/community";
         }
-
     }).catch(error => { console.log("에러가 발생했습니다.");});
+
+
+
+
 }
     
   
+
   </script>

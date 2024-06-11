@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>sliverlink</title>
+  <link rel="stylesheet" href="/css/InPage.css">
+</head>
+<body>
+<header class="header">
+  <h1><a href="http://localhost:3000/mainPage/mainNode" id="mainlogo">sliverlink</a></h1>
+</header>
+<nav>
+  <ul>
+    <li><a href="http://localhost:3000/refinesearch/se">복지혜택 검색</a></li>
+    <li><a href="http://localhost:3000/community/community">커뮤니티 기능</a></li>
+    <li><a href="http://localhost:3000/recommend/recommendPage">맞춤형 추천 받기</a></li>
+    <li><a href="#">이벤트</a></li>
+    <li><a href="#">고객센터 문의하기</a></li>
+    <button id="loginButton">로그인</button>
+  </ul>
+</nav>
+
+
+
+
+<div class="container">
+  <div class="sidebar">
+    <h1>서일대 산악회</h1>
+    <p>멤버 - 200명 초대하기</p>
+    <button type="button">좋아요</button>
+    <button type="button">댓글</button>
+    <button type="button">글쓰기</button>
+  </div>
+  
+  <div class="main-content">
+    <div class="post">
+
+    </div>
+    <div class="photo-album">
+      <h2>게시글</h2>
+      <div>
+      <table>
+        <thead>
+          <tr>
+            <th>이름</th>
+            <th>게시글</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="no_dot">
+            <td id = "result-id">
+            </td>
+            <td id = "result-text">
+            </td>
+          </tr>
+      </tbody>
+      </div>
+
+
+      </table>
+      
+      <input class="inputText" type="text" placeholder="게시글을 입력하세요." required id = "postText">
+      <button class="postButton" onclick="post();">게시</button>
+    </div>
+  </div>
+</div>
+
+
+</div>
+
+  <div id="meetings" class="tab-content">
+
+  </div>
+</div>
+
+<script src="/script/InPage.js"></script>
+</body>
+</html>
+
+<script>
+
+
+
+    function post(){
+    var postText = document.getElementById('postText').value;
+    const resultList = document.getElementById("result-text");
+    var userID = window.sessionStorage.getItem("user");
+    const resultID = document.getElementById("result-id");
+    
+
+    if(postText == ""){
+      alert("게시글을 입력해주세요.");
+      return;
+    }
+    fetch("InPage/post?postText=" + postText + "&userID=" + userID)
+    .then(response => response.json())
+    .then(data => {
+
+          const li = document.createElement('li');
+          li.innerHTML = postText;
+          resultList.append(li);
+          const id = document.createElement('li');
+          id.innerHTML = userID
+          resultID.append(id);
+      
+      // resultList.innerHTML = resultList.textContent+"\n"+ postText;
+      // resultID.innerHTML = userID;
+    })
+    .catch(error => { 
+      console.log(error);
+      resultList.innerHTML = "에러가 발생했습니다."; 
+    });    
+  }
+
+
+
+
+  var id = document.getElementById("loginButton");
+  if(window.sessionStorage.getItem("user") != null){
+    id.innerHTML = "로그아웃";
+    id.addEventListener('click', function() {
+      window.sessionStorage.removeItem("user");
+      location.href = "http://localhost:3000/mainPage/mainNode";
+    });
+  }
+  else{
+    id.innerHTML = "로그인";
+    id.addEventListener('click', function() {
+      location.href = "http://localhost:3000/login/login";
+    });
+  }
+
+  window.onload = function(){
+    var communityID = '1';
+    const resultList = document.getElementById("result-text");
+    const resultID = document.getElementById("result-id");
+
+    fetch("InPage/getPost?communityID=" + communityID)
+    .then(response => response.json())
+    .then(data => {
+        data.forEach(element => {
+        const li = document.createElement('li');
+        li.innerHTML = element['postText'];
+        resultList.append(li);
+        const id = document.createElement('li');
+        id.innerHTML = element['userID'];
+        resultID.append(id);
+        });
+
+      // resultList.innerHTML = resultList.textContent+"\n"+ postText;
+      // resultID.innerHTML = userID;
+      })
+    .catch(error => { 
+      console.log(error);
+      resultList.innerHTML = "에러가 발생했습니다."; 
+    });
+
+    
+
+  }
+
+
+
+</script>
