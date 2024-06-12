@@ -66,7 +66,7 @@ app.get('/refinesearch/se/search',(req,res)=>{
     });
 });
 
-app.get('/mainPage/details',(req,res)=>{
+app.get('/detailPage/old',(req,res)=>{
     const numKey = req.query.numKey;
 
     db.getDetailsByNumKey(numKey, (err, result) => {
