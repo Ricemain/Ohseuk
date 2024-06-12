@@ -6,6 +6,13 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+//여기
+const multer = require('multer');
+const upload = multer({ dest: 'uploads/' });
+const fs = require('fs');
+
+
+
 app.use(bodyParser.urlencoded({ extended: false }) );
 
 const USER_COOKIE_KEY = 'user';
@@ -44,6 +51,9 @@ app.get('/community/class',(req,res)=>{ //커뮤니티 만들기 페이지
 });
 app.get('/community/InPage',(req,res)=>{ //커뮤니티 페이지
     res.sendFile(__dirname + '/community/InPage.html');
+});
+app.get('/testTo', (req, res) => {
+    res.sendFile(__dirname + '/testTo.html');
 });
 
 
@@ -147,6 +157,46 @@ app.get('/community/InPage/getPost',(req,res)=>{
         res.json(result);
     });
 });
+
+
+
+app.post('/upload', upload.single('image'), (req, res) => {
+    fs.readFile(req.file.path, (err, data) => {
+      if (err) throw err;
+  
+      const query = 'INSERT INTO images SET ?';
+      const values = {
+        image: data
+      };
+  
+      db.getConnection().query(query, values, (err, result) => {
+        if (err) throw err;
+  
+        res.send('Image uploaded and saved in database.');
+      });
+    });
+  });
+
+
+app.get('/image/:id', (req, res) => {
+const query = 'SELECT image FROM Images WHERE id = ?';
+const values = [req.params.id];
+
+db.getConnection().query(query, values, (err, result) => {
+    if (err) throw err;
+
+    if (result.length > 0) {
+    res.writeHead(200, {
+        'Content-Type': 'image/jpeg',
+        'Content-Length': result[0].image.length
+    });
+    res.end(result[0].image);
+    } else {
+    res.status(404).send('Image not found.');
+    }
+});
+});
+
 
 
 

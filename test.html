@@ -1,0 +1,33 @@
+<div id="board">
+    <!-- 게시물은 여기에 추가됩니다 -->
+  </div>
+  
+  <form id="postForm">
+    <input type="text" id="title" placeholder="제목" required>
+    <textarea id="content" placeholder="내용" required></textarea>
+    <input type="file" id="image" accept="image/*">
+    <button type="submit">게시</button>
+  </form>
+
+  <script>
+    document.getElementById('postForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  var title = document.getElementById('title').value;
+  var content = document.getElementById('content').value;
+  var image = document.getElementById('image').files[0];
+
+  var post = document.createElement('div');
+  post.innerHTML = '<h2>' + title + '</h2><p>' + content + '</p>';
+
+  if (image) {
+    var img = document.createElement('img');
+    img.src = URL.createObjectURL(image);
+    post.appendChild(img);
+  }
+
+  document.getElementById('board').appendChild(post);
+});
+
+
+  </script>
