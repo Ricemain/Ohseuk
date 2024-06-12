@@ -248,7 +248,7 @@ nav ul li a:hover {
     margin: 0 auto;
 }
 
-.small-box {
+.large-box {
   display: flex;
   flex-direction: column;
   align-items: center;
