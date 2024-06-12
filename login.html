@@ -1,66 +1,22 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>로그인 페이지</title>
-
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="login-container">
-    <form action="/login" method="post">
-      <div class="form-group">
-        <label for="username">아이디:</label>
-        <input type="text" id="username" name="username" required>
-      </div>
-      <div class="form-group">
-        <label for="password">비밀번호:</label>
-        <input type="password" id="password" name="password" required>
-      </div>
-      <div class="form-group">
-        <input type="submit" value="로그인">
-      </div>
-    </form>
-  </div>
+    <div class="login-container">
+        <h2>Login</h2>
+        <form>
+            <div class="input-group">
+                <label for="username">아이디</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="input-group">
+                <label for="password">비밀번호</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit">로그인</button>
+        </form>
+    </div>
 </body>
-
-<body>
-    <h1>로그인</h1>
-    
-    <input type="text" name="id" placeholder="아이디" required id="id">
-    <input type="password" name="password" placeholder="비밀번호" required id="pw">
-    <button onclick="login();">로그인</button>
-    
-</div>
-
-<ul id="result-list">하이</ul>
-</body>
-
 </html>
-
-<script>    
-    function login(){
-        var id = document.getElementById('id').value;
-        var pw = document.getElementById('pw').value;
-        const resultList = document.getElementById("result-list");
-        resultList.innerHTML = "";
-
-        if(id == "" || pw == ""){
-            resultList.innerHTML = "아이디와 비밀번호를 입력해주세요.";
-            return;
-        }
-        
-        fetch("/login/login/user?id=" +id + "&pw=" + pw)
-        .then(response => response.json())
-        .then(data => {
-            resultList.innerHTML = "";
-            data.forEach(item => {
-                console.log("id : " + item['userID']);
-                console.log("pw : " + item['userPassword']);
-                window.sessionStorage.setItem("user", item['userID']);
-                location.href = "http://localhost:3000/mainPage/mainNode";
-            });
-        })
-        .catch(error => { resultList.innerHTML = "에러가 발생했습니다."; });    
-    }
-</script>

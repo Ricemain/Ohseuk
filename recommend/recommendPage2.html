@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>sliverlink</title>
+  <link rel="stylesheet" href="/css/oold.css">
+</head>
+<body>
+<header class="header">
+  <h1><a href="http://localhost:3000/mainPage/mainNode">sliverlink</a></h1>
+</header>
+<nav>
+  <ul>
+    <li><a href="http://localhost:3000/refinesearch/se">복지혜택 검색</a></li>
+    <li><a href="http://localhost:3000/community/community">커뮤니티 기능</a></li>
+    <li><a href="http://localhost:3000/recommend/recommendPage">맞춤형 추천 받기</a></li>
+    <li><a href="#">이벤트</a></li>
+    <li><a href="#">고객센터 문의하기</a></li>
+    <button id="loginButton" >로그인</button>
+  </ul>
+</nav>
+
+<div class="small">
+  • 맞춤형 추천 &gt; <span>복지 혜택 추천</span>
+</div>
+
+<div class="big">
+  맞춤형 복지 안내
+</div> 
+
+<div class="content-box">
+  <div class="divider"></div>
+  <h1>회원님을 위해 준비한 맞춤형 복지 정보를 안내 받아보세요</h1>
+  <button id="recommendButton" onclick="recommendButton();">추천 받기</button>
+</div>
+
+<ul id="recommend-list"></ul>
+
+<script src="/script/ooold.js"></script>
+</body>
+</html>
+
+<script>
+  var id = document.getElementById("loginButton");
+  if(window.sessionStorage.getItem("user") != null){
+    id.innerHTML = "로그아웃";
+    id.addEventListener('click', function() {
+      window.sessionStorage.removeItem("user");
+      location.href = "http://localhost:3000/mainPage/mainNode";
+    });
+  }
+  else{
+    id.innerHTML = "로그인";
+    id.addEventListener('click', function() {
+      location.href = "http://localhost:3000/login/login";
+    });
+  }
+
+  function recommendButton(){
+    var id = window.sessionStorage.getItem("user");
+    console.log(id);
+    const recommendlist = document.getElementById("recommend-list");
+    recommendlist.innerHTML = "";
+
+    fetch("/recommend/recommendPage/recommendButton?id="+id)
+    .then(response => response.json())
+    .then(data => {
+      recommendlist.innerHTML = "";
+      data.forEach(item => {
+        const li = document.createElement("li");
+        li.innerHTML = item['idS'];
+        recommendlist.append(li);
+        
+      });
+    })
+    .catch(error => { console.log("에러가 발생했습니다.");});
+  }
+
+
+
+
+
+</script>
