@@ -112,7 +112,6 @@ function getRecommend(id, callback) {
 
         connection.query(sql1, params, (err, result, fields) => {
             if(err) return callback(err);
-            console.log(result);
             callback(null, result);
         });
     });
