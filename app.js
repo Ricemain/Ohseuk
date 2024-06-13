@@ -240,14 +240,6 @@ app.get('/community/InPage/joinButton',(req,res)=>{
 });
 
 
-
-
-
-
-
-
-
-
 //여기 테스트 용
 app.post('/upload', upload.single('image'), (req, res) => {
     fs.readFile(req.file.path, (err, data) => {
@@ -285,16 +277,3 @@ db.getConnection().query(query, values, (err, result) => {
     }
 });
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
