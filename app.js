@@ -52,7 +52,16 @@ app.get('/community/class',(req,res)=>{ //커뮤니티 만들기 페이지
 app.get('/community/InPage',(req,res)=>{ //커뮤니티 페이지
     res.sendFile(__dirname + '/community/InPage.html');
 });
-app.get('/testTo', (req, res) => {
+app.get('/community/myCommunity',(req,res)=>{ //내 커뮤니티 페이지
+    res.sendFile(__dirname + '/community/myCommunity.html');
+});
+app.get('/community/otherCommunity',(req,res)=>{ //다른 커뮤니티 페이지
+    res.sendFile(__dirname + '/community/otherCommunity.html');
+});
+
+
+
+app.get('/testTo', (req, res) => { //테스트용
     res.sendFile(__dirname + '/testTo.html');
 });
 
@@ -142,8 +151,9 @@ app.get('/community/class/creatPage',(req,res)=>{
 app.get('/community/InPage/post',(req,res)=>{
     const postText = req.query.postText;
     const userID = req.query.userID;
+    const communityID = req.query.communityID;
 
-    db.getPost(postText, userID, (err, result) => {
+    db.getPost(postText, userID, communityID, (err, result) => {
         if(err) return res.status(500).send('DB Error');
         res.json(result);
     });
@@ -158,8 +168,59 @@ app.get('/community/InPage/getPost',(req,res)=>{
     });
 });
 
+app.get('/community/myCommunity/getCommunityUser' ,(req,res)=>{
+    const userID = req.query.userID;
+
+    db.getCommunityUser(userID, (err, result) => {
+        if(err) return res.status(500).send('DB Error');
+        res.json(result);
+    });
+});
+
+app.get('/community/otherCommunity/getCommunityAll',(req,res)=>{
+
+    db.getCommunityAll((err, result) => {
+        if(err) return res.status(500).send('DB Error');
+        res.json(result);
+    });
+});
+
+app.get ('/community/InPage/getCommunityName',(req,res)=>{
+    const communityID = req.query.communityID;
+
+    db.getCommunityName(communityID, (err, result) => {
+        if(err) return res.status(500).send('DB Error');
+        res.json(result);
+    });
+});
+
+app.get('/community/InPage/getCommunityNum',(req,res)=>{
+    const communityID = req.query.communityID;
+
+    db.getCommunityNum(communityID, (err, result) => {
+        if(err) return res.status(500).send('DB Error');
+        res.json(result);
+    });
+});
+
+app.get('/community/InPage/joinButton',(req,res)=>{
+    const userID = req.query.userID;
+    const communityID = req.query.communityID;
+
+    db.getJoinButton(userID, communityID, (err, result) => {
+        if(err) return res.status(500).send('DB Error');
+        res.json(result);
+    });
+});
 
 
+
+
+
+
+
+
+//여기 테스트 용
 app.post('/upload', upload.single('image'), (req, res) => {
     fs.readFile(req.file.path, (err, data) => {
       if (err) throw err;
@@ -196,6 +257,9 @@ db.getConnection().query(query, values, (err, result) => {
     }
 });
 });
+
+
+
 
 
 

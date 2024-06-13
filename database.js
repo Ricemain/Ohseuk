@@ -117,12 +117,12 @@ function getRecommend(id, callback) {
 }
 
 function getCreatCommunity(inputField, userID, callback) {
-    var sql = 'INSERT INTO community (name, userID) VALUES (?, ?)';
+    var sql = 'INSERT INTO community (name, userID, communityUser) VALUES (?, ?, ?)';
     var sql1 = 'SELECT * FROM user WHERE userID = ?'; 
     var sql2 = 'UPDATE user SET communityID = ?  WHERE userID = ?';
     
     
-    connection.query(sql, [inputField, userID], (err, result, fields) => {
+    connection.query(sql, [inputField, userID, userID], (err, result, fields) => {
         if(err) return callback(err);
         var inputFielduser = result.insertId;
         connection.query(sql1, [userID], (err, result, fields) => {
@@ -184,13 +184,23 @@ connection.query(sql, [numKey], (err, result, fields) => {
 });
 }
 
-function getPost(postText, userID, callback) {
+function getPost(postText, userID, communityID, callback) {
     var sql = 'INSERT INTO communityText (postText, userID, communityID) VALUES (?, ?, ?)';
-    var communityID = '1';
-    connection.query(sql, [postText, userID, communityID], (err, result, fields) => {
+    var sql2 = 'SELECT * FROM community WHERE numID= ? AND FIND_IN_SET(?, communityUser)';
+    connection.query(sql2, [communityID, userID], (err, result, fields) => {
         if(err) return callback(err);
-        callback(null, result);
+        if(result.length == 0) {
+            callback(null, 'fail');
+        }
+        else {
+            connection.query(sql, [postText, userID, communityID], (err, result, fields) => {
+                if(err) return callback(err);
+                callback(null, result);
+            });
+        }
     });
+
+    
 }
 
 function getPostPage(communityID, callback) {
@@ -201,6 +211,75 @@ function getPostPage(communityID, callback) {
     });
 }
 
+function getCommunityUser(userID, callback) {
+    var sql = 'SELECT * FROM community WHERE FIND_IN_SET(?, communityUser)';
+    connection.query(sql, [userID], (err, result, fields) => {
+        if(err) return callback(err);
+        callback(null, result);
+    });
+
+}
+
+function getCommunityAll(callback) {
+    var sql = 'SELECT * FROM community WHERE 1=1';
+    connection.query(sql, (err, result, fields) => {
+        if(err) return callback(err);
+        callback(null, result);
+    });
+}
+
+function getCommunityName (communityID, callback) {
+    var sql = 'SELECT * FROM community WHERE numID = ?';
+    connection.query(sql, [communityID], (err, result, fields) => {
+        if(err) return callback(err);
+        callback(null, result);
+    });
+}
+
+function getCommunityNum(communityID, callback) {
+    var sql = 'SELECT LENGTH(communityUser) - LENGTH(REPLACE(communityUser, ",", "")) + 1 as count FROM community WHERE numID = ?';
+    connection.query(sql, [communityID], (err, result, fields) => {
+        if(err) return callback(err);
+        callback(null, result);
+    });
+
+    
+}
+
+function getJoinButton(userID, communityID, callback) {
+    var sql = 'SELECT * FROM community WHERE numID = ?';
+    var sql2 = 'SELECT * FROM community WHERE numID= ? AND FIND_IN_SET(?, communityUser)';
+    var sql1 = 'UPDATE community SET communityUser = ? WHERE numID = ?';
+
+    
+
+    connection.query(sql, [communityID], (err, result, fields) => {
+        if(err) return callback(err);
+        var communityUser = result[0].communityUser;
+        
+        if(communityUser == null) {
+            communityUser = userID;
+        }
+        else {
+            communityUser = communityUser + ',' + userID;
+        }
+        
+        connection.query(sql2, [communityID, userID], (err, result, fields) => {
+            if(err) return callback(err);
+            if(result.length == 0) {
+            connection.query(sql1, [communityUser, communityID], (err, result, fields) => {
+                if(err) return callback(err);
+                callback(null, 'success');
+            
+            });
+            }
+            else {
+                callback(null, 'fail');
+            }
+        });
+    });
+
+}
     
 
 
@@ -214,5 +293,10 @@ module.exports = {
     getCountBySearch,
     getDetailsByNumKey,
     getPost,
-    getPostPage
+    getPostPage,
+    getCommunityUser,
+    getCommunityAll,
+    getCommunityName,
+    getJoinButton,
+    getCommunityNum
 }

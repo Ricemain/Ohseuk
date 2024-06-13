@@ -20,6 +20,18 @@ header h1 {
   font-size: 24px; 
 }
 
+h2 {
+  font-size: 35px; 
+  font-weight: bold; 
+  margin-top: 20px; 
+  margin-left: 10px;
+
+}
+p {
+  font-size: 20px; 
+  margin-left: 10px; 
+}
+
 
 nav {
   border-bottom: 2px solid #908a8a; 
@@ -127,18 +139,31 @@ nav ul li a:hover {
   list-style-type: none;
 }
 
+th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  border-color: #96D4D4;
+  border-width: 1px;
+  padding: 10px;
+  line-height: 25px;
+  width: 2000px;
+}
+
+
+
+
 
 /* Path: public/css/community.css */
 body { font-family: 'Noto Sans KR', sans-serif; margin: 0; padding: 0; background-color: #f8f9fa; }
 .container { display: flex; }
-.sidebar { width: 250px; background-color: white; padding: 20px; }
+.sidebar { width: 500px; height: 100%; background-color: whitesmoke ; padding: 20px; }
 .sidebar h1 { margin-bottom: 10px; }
 .sidebar p { margin-bottom: 20px; }
 .sidebar button { display: block; margin-bottom: 10px; }
 .main-content { flex-grow: 1; padding: 20px; }
 .post img { width: 100%; height: auto; margin-bottom: 20px; }
-.photo-album { background-color: white; padding: 20px; margin-top: 20px; }
+.photo-album { background-color: white; padding: 50px; margin-top: 20px; width: 800px; display: flex; justify-content: center;}
 .gallery { display: flex; justify-content: space-between; }
 .gallery img { width: calc(33.333% - 10px); height: auto; margin-bottom: 10px; }
-.inputText { width: 50%; padding: 10px; margin-bottom: 10px; }
-.postButton { padding: 10px; background-color: #007bff; color: white; border: none; cursor: pointer; }
+.inputText { width: 83%; padding: 10px; margin-bottom: 10px;}
+.postButton { padding: 10px; background-color: #007bff; color: white; border: none; cursor: pointer; width: auto; height: auto;}

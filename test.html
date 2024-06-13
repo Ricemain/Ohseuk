@@ -1,33 +1,264 @@
-<div id="board">
-    <!-- 게시물은 여기에 추가됩니다 -->
-  </div>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sliverlink</title>
+    <style>
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #fff;
+  color: #333;
+}
+
+header {
+  padding: 8px;
+  text-align: center;
+  background-color: #F0EFEF; 
+}
+
+.header {
+  text-align: left;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 24px; 
+}
+
+nav {
+  border-bottom: 2px solid #908a8a; 
+  padding: 15px 0;
+  text-align: center;
+  background-color: #F0EFEF; 
+}
+
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav ul li {
+  display: inline;
+  margin-right: 20px;
+}
+
+nav ul li a {
+  color: #333; 
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 18px; 
+}
+
+nav ul li a:hover {
+  text-decoration: underline;
+}
+
+#loginButton {
+  padding: 12px 20px; 
+  border-radius: 20px; 
+  border: 1px solid #31B3DC; 
+  background-color: #31B3DC; 
+  color: #fff; 
+  font-size: 15px; 
+  cursor: pointer; 
+  transition: background-color 0.3s ease; 
+  float: right; 
+  margin-right: 20px;
+  padding-top: 10px; 
+  margin-top: -20px;
+}
+
+#loginButton:hover {
+  background-color: #4682B4;
+}
+
+.line {
+  width: 1000px;
+  position: absolute;
+  top: calc(35% - 13px); 
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-bottom: 1px solid #afafaf;
+}
+
+#inputText {
+  position: absolute;
+  top: calc(35% - 83px); 
+  left: calc(50% - 480px);
+  font-size: 45px;
+  color: #AAAAAA;
+}
+
+.inputField {
+  display: none;
+  position: absolute;
+  top: calc(35% - 90px);
+  left: calc(50% - 480px);
+  font-size: 45px;
+  border: none;
+  outline: none;
+  background: transparent;
+  border-bottom: none;
+  padding-bottom: 5px;
+}
+
+/*생성 취소 버튼*/
+.button-container {
+  display: flex;
   
-  <form id="postForm">
-    <input type="text" id="title" placeholder="제목" required>
-    <textarea id="content" placeholder="내용" required></textarea>
-    <input type="file" id="image" accept="image/*">
-    <button type="submit">게시</button>
-  </form>
+  justify-content: center; 
+  margin-top: 350px; 
+}
 
-  <script>
-    document.getElementById('postForm').addEventListener('submit', function(e) {
-  e.preventDefault();
+.produce {
+  padding: 10px 20px;
+  margin: 0 5px;
+  border: none;
+  border-radius: 5px;
+  background-color: #0075FF;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  width: 120px; 
+  height: 40px; 
+  font-weight: bold; 
+}
 
-  var title = document.getElementById('title').value;
-  var content = document.getElementById('content').value;
-  var image = document.getElementById('image').files[0];
+.produce:hover {
+  background-color: #5ea9ff;
+}
 
-  var post = document.createElement('div');
-  post.innerHTML = '<h2>' + title + '</h2><p>' + content + '</p>';
+.reset {
+  padding: 10px 20px;
+  margin: 0 5px; 
+  border: none;
+  border-radius: 5px;
+  background-color: #7F7F7F;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  width: 120px; 
+  height: 40px;
+  font-weight: bold; 
+}
 
-  if (image) {
-    var img = document.createElement('img');
-    img.src = URL.createObjectURL(image);
-    post.appendChild(img);
-  }
+.reset:hover {
+  background-color: #a4a4a4;
+}
 
-  document.getElementById('board').appendChild(post);
-});
+.custom-button-container {
+  text-align: center; 
+  margin-top: 250px; 
+}
 
+.file-upload-button {
+  padding: 10px 20px;
+  background-color: #0075FF;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  margin-right: 800px;
+}
+
+/* 사진 첨부 */
+.image-preview {
+  display: none;
+  text-align: center;
+
+}
+
+.image-preview img {
+  max-width: 100%;
+  max-height: 300px;
+  margin-bottom: -300px;
+}
+
+.image-preview-container {
+  text-align: center;
+  margin-top: 20px; 
+}
+
+
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1><a href="http://localhost:3000/mainPage/mainNode" id="mainlogo">sliverlink</a></h1>
+      </header>
+      <nav>
+        <ul>
+          <li><a href="http://localhost:3000/refinesearch/se">복지혜택 검색</a></li>
+          <li><a href="http://localhost:3000/community/community">커뮤니티 기능</a></li>
+          <li><a href="http://localhost:3000/recommend/recommendPage">맞춤형 추천 받기</a></li>
+          <li><a href="#">이벤트</a></li>
+          <li><a href="#">고객센터 문의하기</a></li>
+          <button id="loginButton">로그인</button>
+        </ul>
+    </nav>
+
+    <div class="line"></div>
+    <div id="inputText">모임 이름 입력</div>
+    <input type="text" id="inputField" class="inputField">
+
+    <div class="custom-button-container">
+        <label for="imageUpload" class="file-upload-button">이미지 선택</label>
+        <input type="file" id="imageUpload" accept="image/*" style="display:none;">
+    </div>
+    
+    <div class="image-preview-container">
+        <div class="image-preview">
+            <img id="selectedImage" src="#" alt="Selected Image">
+        </div>
+    </div>
+    
+    <div class="button-container">
+        <button class="produce" onclick="creatPage();">생성</button>
+        <button class="reset">취소</button>
+    </div> <br><br>
+
+    <script src="/script/class.js"></script>
+</body>
+</html>
+
+<script>
+    var id = document.getElementById("loginButton");
+    if(window.sessionStorage.getItem("user") != null){
+      id.innerHTML = "로그아웃";
+      id.addEventListener('click', function() {
+        window.sessionStorage.removeItem("user");
+        location.href = "http://localhost:3000/mainPage/mainNode";
+      });
+    }
+    else{
+      id.innerHTML = "로그인";
+      id.addEventListener('click', function() {
+        location.href = "http://localhost:3000/login/login";
+      });
+    }
+
+function creatPage(){
+  
+    var inputField = document.getElementById("inputField");
+    var userID = window.sessionStorage.getItem("user");
+    console.log(userID);
+    
+    fetch("class/creatPage?inputField="+inputField.value + "&userID=" + userID)
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+        if(data!=null){
+            alert("생성되었습니다.");
+            location.href = "http://localhost:3000/community/community";
+        }
+    }).catch(error => { console.log("에러가 발생했습니다.");});
+}
+    
+  
 
   </script>

@@ -26,11 +26,9 @@
 
 <div class="container">
   <div class="sidebar">
-    <h1>서일대 산악회</h1>
-    <p>멤버 - 200명 초대하기</p>
-    <button type="button">좋아요</button>
-    <button type="button">댓글</button>
-    <button type="button">글쓰기</button>
+    <h2 id ="community-name" class="h2header"></h2>
+    <p id="community-num"></p>
+    <button class="postButton" onclick="joinButton();">가입하기</button>
   </div>
   
   <div class="main-content">
@@ -38,7 +36,7 @@
 
     </div>
     <div class="photo-album">
-      <h2>게시글</h2>
+  
       <div>
       <table>
         <thead>
@@ -49,15 +47,12 @@
         </thead>
         <tbody>
           <tr class="no_dot">
-            <td id = "result-id">
-            </td>
-            <td id = "result-text">
-            </td>
+            <td id = "result-id"></td>
+            <td id = "result-text"></td>
           </tr>
+
       </tbody>
       </div>
-
-
       </table>
       
       <input class="inputText" type="text" placeholder="게시글을 입력하세요." required id = "postText">
@@ -83,34 +78,49 @@
 
 
     function post(){
+    if(window.sessionStorage.getItem("user") == null){
+      alert("로그인이 필요합니다.");
+      return;
+    }
     var postText = document.getElementById('postText').value;
     const resultList = document.getElementById("result-text");
     var userID = window.sessionStorage.getItem("user");
     const resultID = document.getElementById("result-id");
+    communityID = window.location.href.split('?')[1].split('=')[1];
+
+
     
 
     if(postText == ""){
       alert("게시글을 입력해주세요.");
       return;
     }
-    fetch("InPage/post?postText=" + postText + "&userID=" + userID)
+    fetch("InPage/post?postText=" + postText + "&userID=" + userID + "&communityID=" + communityID)
     .then(response => response.json())
     .then(data => {
-
+      if(data =="fail"){
+        alert("모임에 가입해 주세요.");
+        return;
+      }
+      else{
           const li = document.createElement('li');
           li.innerHTML = postText;
           resultList.append(li);
           const id = document.createElement('li');
           id.innerHTML = userID
           resultID.append(id);
-      
+      }
       // resultList.innerHTML = resultList.textContent+"\n"+ postText;
       // resultID.innerHTML = userID;
     })
     .catch(error => { 
       console.log(error);
       resultList.innerHTML = "에러가 발생했습니다."; 
-    });    
+    }).finally(() => {
+      document.getElementById('postText').value = "";
+    });
+    
+    
   }
 
 
@@ -132,7 +142,10 @@
   }
 
   window.onload = function(){
-    var communityID = '1';
+    var urlStr = window.location.href;
+    var url = new URL(urlStr);
+    var urlParams = url.searchParams;
+    var communityID = urlParams.get('communityID').toString();
     const resultList = document.getElementById("result-text");
     const resultID = document.getElementById("result-id");
 
@@ -156,7 +169,68 @@
       resultList.innerHTML = "에러가 발생했습니다."; 
     });
 
+    const communityName = document.getElementById("community-name");
+
+    fetch("InPage/getCommunityName?communityID=" + communityID)
+    .then(response => response.json())
+    .then(data => {
+      data.forEach(item => {
+        const h2 = document.querySelector('h2');
+        h2.innerHTML = item['name'];
+        communityName.append(h2);
+
+      });
+    })
+    .catch(error => { 
+      console.log(error);
+    });
+
+    const communityNum = document.getElementById("community-num");
+
+    fetch("InPage/getCommunityNum?communityID=" + communityID)
+    .then(response => response.json())
+    .then(data => {
+      console.log(data);
+      const p = document.createElement('p');
+      p.innerHTML = "현재 인원 : " + data[0]['count'] + "명";
+      communityNum.append(p);
+    })
+
+
+
+  }
+
+  function joinButton(){
+    if(window.sessionStorage.getItem("user") == null){
+      alert("로그인이 필요합니다.");
+      return;
+    }
+
+    var userID = window.sessionStorage.getItem("user");
+    var urlStr = window.location.href;
+    var url = new URL(urlStr);
+    var urlParams = url.searchParams;
+    var communityID = urlParams.get('communityID').toString();
+    console.log(communityID);
+
     
+
+    fetch("InPage/joinButton?userID=" + userID + "&communityID=" + communityID)
+    .then(response => response.json())
+    .then(data => {
+      console.log(data);
+      if(data == "success"){
+        alert("가입되었습니다.");
+      }
+      else{
+        alert("이미 가입되어있습니다.");
+      }
+    })
+    .catch(error => { 
+      console.log(error);
+    }).finally(() => {
+      location.reload();
+    });
 
   }
 

@@ -29,7 +29,11 @@ function goToAnotherPage() {
 }
 
 function goToInPage() {
-  window.location.href = 'http://localhost:3000/community/InPage';
+  window.location.href = 'http://localhost:3000/community/myCommunity';
+}
+
+function goToOtherPage(){
+  window.location.href = 'http://localhost:3000/community/otherCommunity';
 }
 
 
