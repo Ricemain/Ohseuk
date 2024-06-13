@@ -109,8 +109,10 @@ function getRecommend(id, callback) {
             sql1 += ' AND ageS IN ("0", ?)';
             params.push(userAge);
         }
+
         connection.query(sql1, params, (err, result, fields) => {
             if(err) return callback(err);
+            console.log(result);
             callback(null, result);
         });
     });
