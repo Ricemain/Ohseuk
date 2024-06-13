@@ -51,7 +51,44 @@
             var url = new URL(urlStr);
             var urlParams = url.searchParams;
             var numKey = urlParams.get('numKey');
- 
+
+            fetch("old/rewiewView?numKey=" + numKey)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+
+                const showReviews = () => {
+                    const qualificationInfo = document.getElementById("qualificationInfo");
+                    
+                    qualificationInfo.innerHTML = `
+                        <p style="text-align: left; font-weight: bold; font-size: 30px;">리뷰</p>
+                        <ul id="test001" style="list-style-type: disc; padding-left: 20px; text-align: left; font-size: 25px; list-style-type: none;" >
+                        </ul>
+                        <textarea style="width: 100%; height: 100px; font-size: 20px;" id="reviewText"></textarea>
+                        <button style="padding: 10px; background-color: #007bff; color: white; border: none; cursor: pointer; width: 100%; height: auto;" onclick="ReviewPost();">등록</button>
+                    `;
+                    const reviewButton = document.getElementById("reviewButton");
+                    const reviewTextList = document.getElementById("test001");
+                    data.forEach(element => {
+                        console.log(element);
+                        const userID = element.userID;
+                        const reviewText = element.reviewText;
+                        const li = document.createElement('li');
+                        li.innerHTML = "아이디: "+element['userID']+ " 리뷰: " + element['reviewText'];
+                        console.log(li);
+                        reviewTextList.appendChild(li);
+                        console.log("hi");
+                });
+                    };
+                reviewButton.addEventListener("click", showReviews);
+
+                
+
+            
+                
+            }).catch(error => {
+                console.error('Error:', error);
+            });
 
 
             // 서버로 numKey를 전달하여 데이터 가져오기
@@ -83,17 +120,21 @@
                         `;
                     };
 
+                    
+
                     const qualificationButton = document.getElementById("qualificationButton");
                     qualificationButton.addEventListener("click", showQualifications);
 
                     const methodButton = document.getElementById("methodButton");
                     methodButton.addEventListener("click", showMethods);
+
+
                 })
                 .catch(error => {
                     console.error('Error:', error);
                 });
 
-            menuItems.forEach(item => {
+                menuItems.forEach(item => {
                 item.addEventListener('click', () => {
                     const text = item.getAttribute('data-text');
                     textBox.textContent = text;
@@ -121,6 +162,46 @@
       location.href = "http://localhost:3000/login/login";
     });
   }
+
+  function ReviewPost(){
+    var reviewText = document.getElementById("reviewText").value;
+    var urlStr = window.location.href;
+    var url = new URL(urlStr);
+    var urlParams = url.searchParams;
+    var numKey = urlParams.get('numKey');
+    var user = window.sessionStorage.getItem("user");
+    if(user == null){
+      alert("로그인이 필요합니다.");
+      location.href = "http://localhost:3000/login/login";
+      return;
+    }
+
+    if(reviewText == ""){
+      alert("리뷰 내용을 입력해주세요.");
+      return;
+    }
+
+    fetch("old/review?numKey=" + numKey+"&user="+user+"&reviewText="+reviewText)
+    .then(response => response.json())
+    .then(data => {
+    console.log(data);
+      if(data!=null){
+        alert("리뷰가 등록되었습니다.");
+        location.reload();
+      }
+      else{
+        alert("리뷰 등록에 실패했습니다.");
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+
+}
+    
+
+
+
 
 
     </script>

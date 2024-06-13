@@ -91,14 +91,34 @@ app.get('/refinesearch/se/search',(req,res)=>{
 
 app.get('/detailPage/old/detail',(req,res)=>{
     const numKey = req.query.numKey;
-    console.log(numKey);
-
     db.getDetailsByNumKey(numKey, (err, result) => {
         if(err) return res.status(500).send('DB Error');
         res.json(result);
 
     });
 });
+
+app.get('/detailPage/old/review',(req,res)=>{
+    const numKey = req.query.numKey;
+    const reviewText = req.query.reviewText;
+    const user = req.query.user;
+
+    db.getReviewByNumKey(numKey,user,reviewText, (err, result) => {
+        if(err) return res.status(500).send('DB Error');
+        res.json(result);
+    });
+});
+
+app.get('/detailPage/old/rewiewView',(req,res)=>{
+    const numKey = req.query.numKey;
+    
+
+    db.getReviewByNumKeyView(numKey, (err, result) => {
+        if(err) return res.status(500).send('DB Error');
+        res.json(result);
+    });
+});
+
 
 app.get('/login/login/user',(req,res)=>{
     const id = req.query.id;
@@ -218,6 +238,8 @@ app.get('/community/InPage/joinButton',(req,res)=>{
         res.json(result);
     });
 });
+
+
 
 
 

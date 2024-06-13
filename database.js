@@ -281,6 +281,22 @@ function getJoinButton(userID, communityID, callback) {
     });
 
 }
+
+function getReviewByNumKey(numKey,user,reviewText, callback) {
+    var sql = 'INSERT INTO review (reviewText,userID,numKey) VALUES (?,?,?)';   
+    connection.query(sql, [reviewText,user,numKey], (err, result, fields) => {
+        if(err) return callback(err);
+        callback(null, 'success');
+    });
+}
+
+function getReviewByNumKeyView(numKey, callback) {
+    var sql = 'SELECT * FROM review WHERE numKey = ?';
+    connection.query(sql, [numKey], (err, result, fields) => {
+        if(err) return callback(err);
+        callback(null, result);
+    });
+}
     
 
 
@@ -299,5 +315,7 @@ module.exports = {
     getCommunityAll,
     getCommunityName,
     getJoinButton,
-    getCommunityNum
+    getCommunityNum,
+    getReviewByNumKey,
+    getReviewByNumKeyView
 }

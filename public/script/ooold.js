@@ -48,7 +48,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const methodButton = document.getElementById("methodButton");
   methodButton.addEventListener("click", showMethods);
-
+  const reviewButton = document.getElementById("reviewButton");
+  reviewButton.addEventListener("click", showReviews);
 
   const showReviews = () => {
     const reviewInfo = document.getElementById("qualificationInfo");
@@ -72,8 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
 
-  const reviewButton = document.getElementById("reviewButton");
-  reviewButton.addEventListener("click", showReviews);
+  
 
 
   showQualifications();
