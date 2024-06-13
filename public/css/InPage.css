@@ -139,6 +139,31 @@ nav ul li a:hover {
   list-style-type: none;
 }
 
+table{
+  width: 50px;
+  border-collapse: collapse;
+  border-spacing: 0;
+  border: 1px solid #96D4D4;
+
+}
+
+table{
+  border-collapse: collapse;
+  border-spacing: 0;
+  border: 1px solid black;
+  width: 100%;
+}
+table th{
+  background-color: #96D4D4;
+  border: 1px solid #96D4D4;
+  padding: 10px;
+  line-height: 25px;
+  width: 10%;
+}
+
+
+
+
 th, td {
   border: 1px solid black;
   border-collapse: collapse;
@@ -146,7 +171,7 @@ th, td {
   border-width: 1px;
   padding: 10px;
   line-height: 25px;
-  width: 2000px;
+  width: 200px;
 }
 
 

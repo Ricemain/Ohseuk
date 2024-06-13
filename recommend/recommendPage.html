@@ -73,6 +73,11 @@
   
     window.onload = function(){
       var id = window.sessionStorage.getItem("user");
+      if(id == null){
+        alert("로그인이 필요한 서비스입니다.");
+        location.href = "http://localhost:3000/login/login";
+        return;
+      }
       console.log(id);
       const recommendlist = document.getElementById("recommend-list");
       recommendlist.innerHTML = "";
@@ -190,6 +195,11 @@
       })
       .catch(error => { console.log("에러가 발생했습니다.");});
     } 
+
+    function viewDetails(numKey) {
+          //window.location.href = '/mainPage/details?numKey=${numKey}'
+            window.location.href = `http://localhost:3000/detailPage/old?numKey=${numKey}`;
+      }
 
 
   </script>

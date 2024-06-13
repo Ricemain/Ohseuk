@@ -7,13 +7,13 @@
 </head>
 <body>
     <header class="header">
-        <h1>sliverlink</h1>
+        <h1><a href="http://localhost:3000/mainPage/mainNode" id="mainlogo">sliverlink</a></h1>
     </header>
     <nav>
         <ul>
-            <li><a href="#">복지혜택 검색</a></li>
-            <li><a href="#">커뮤니티 기능</a></li>
-            <li><a href="#">맞춤형 추천 받기</a></li>
+            <li><a href="http://localhost:3000/refinesearch/se">복지혜택 검색</a></li>
+            <li><a href="http://localhost:3000/community/community">커뮤니티 기능</a></li>
+            <li><a href="http://localhost:3000/recommend/recommendPage">맞춤형 추천 받기</a></li>
             <li><a href="#">이벤트</a></li>
             <li><a href="#">고객센터 문의하기</a></li>
             <button id="loginButton">로그인</button>
@@ -44,11 +44,18 @@
             const textBox = document.querySelector('.text');
 
             // URL에서 numKey 추출
-            const params = new URLSearchParams(window.location.search);
-            const numKey = params.get('numKey');
+            // const params = new URLSearchParams(window.location.search);
+            // const numKey = params.get('numKey');
+
+            var urlStr = window.location.href;
+            var url = new URL(urlStr);
+            var urlParams = url.searchParams;
+            var numKey = urlParams.get('numKey');
+ 
+
 
             // 서버로 numKey를 전달하여 데이터 가져오기
-            fetch(`/mainPage/details?numKey=${numKey}`)
+            fetch("old/detail?numKey=" + numKey)
                 .then(response => response.json())
                 .then(data => {
                     document.getElementById('idC').textContent = data.idC;
@@ -99,6 +106,23 @@
                 });
             });
         });
+
+        var id = document.getElementById("loginButton");
+  if(window.sessionStorage.getItem("user") != null){
+    id.innerHTML = "로그아웃";
+    id.addEventListener('click', function() {
+      window.sessionStorage.removeItem("user");
+      location.href = "http://localhost:3000/mainPage/mainNode";
+    });
+  }
+  else{
+    id.innerHTML = "로그인";
+    id.addEventListener('click', function() {
+      location.href = "http://localhost:3000/login/login";
+    });
+  }
+
+
     </script>
 </body>
 </html>

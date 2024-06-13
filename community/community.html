@@ -88,4 +88,13 @@
     });
   }
 
+  window.onload = function(){
+    var id = window.sessionStorage.getItem("user");
+    if(id == null){
+        alert("로그인이 필요한 서비스입니다.");
+        location.href = "http://localhost:3000/login/login";
+        return;
+    }
+  }
+
 </script>

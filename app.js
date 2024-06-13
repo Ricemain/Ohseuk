@@ -59,6 +59,10 @@ app.get('/community/otherCommunity',(req,res)=>{ //다른 커뮤니티 페이지
     res.sendFile(__dirname + '/community/otherCommunity.html');
 });
 
+app.get('/detailPage/old',(req,res)=>{ //상세페이지
+    res.sendFile(__dirname + '/detailPage/old.html');
+});
+
 
 
 app.get('/testTo', (req, res) => { //테스트용
@@ -85,12 +89,14 @@ app.get('/refinesearch/se/search',(req,res)=>{
     });
 });
 
-app.get('/detailPage/old',(req,res)=>{
+app.get('/detailPage/old/detail',(req,res)=>{
     const numKey = req.query.numKey;
+    console.log(numKey);
 
     db.getDetailsByNumKey(numKey, (err, result) => {
         if(err) return res.status(500).send('DB Error');
         res.json(result);
+
     });
 });
 

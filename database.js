@@ -178,7 +178,7 @@ function getCountBySearch(region1, region2, puInstitution1, serviceKey, online, 
     });
 }
 function getDetailsByNumKey(numKey, callback) {
-var sql = 'SELECT idC, serviceC, applicationC FROM silverlinkcontent1 WHERE numKey = ?';
+var sql = 'SELECT idC, serviceC, supportC, applicationC FROM silverlinkcontent1 WHERE numKey = ?';
 connection.query(sql, [numKey], (err, result, fields) => {
     if(err) return callback(err);
     callback(null, result[0]);

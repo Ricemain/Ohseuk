@@ -21,9 +21,6 @@
   </ul>
 </nav>
 
-
-
-
 <div class="container">
   <div class="sidebar">
     <h2 id ="community-name" class="h2header"></h2>
@@ -40,20 +37,21 @@
       <div>
       <table>
         <thead>
-          <tr>
+          <tr class="TableHeader">
             <th>이름</th>
             <th>게시글</th>
           </tr>
         </thead>
         <tbody>
-          <tr class="no_dot">
+          <!-- <tr class="no_dot">
             <td id = "result-id"></td>
             <td id = "result-text"></td>
-          </tr>
-
+          </tr> -->
+          
       </tbody>
       </div>
       </table>
+      <div id="result-text"><td></td></div>
       
       <input class="inputText" type="text" placeholder="게시글을 입력하세요." required id = "postText">
       <button class="postButton" onclick="post();">게시</button>
@@ -88,7 +86,7 @@
     const resultID = document.getElementById("result-id");
     communityID = window.location.href.split('?')[1].split('=')[1];
 
-
+    
     
 
     if(postText == ""){
@@ -103,12 +101,16 @@
         return;
       }
       else{
-          const li = document.createElement('li');
-          li.innerHTML = postText;
-          resultList.append(li);
-          const id = document.createElement('li');
-          id.innerHTML = userID
-          resultID.append(id);
+          const li = document.createElement('table');
+          li.innerHTML = "<tr><td>" + userID + "</td><td>" + postText + "</td></tr>";
+          resultList.appendChild(li);
+          
+          
+          
+          
+          // const id = document.createElement('table');
+          // id.innerHTML = userID
+          
       }
       // resultList.innerHTML = resultList.textContent+"\n"+ postText;
       // resultID.innerHTML = userID;
@@ -153,12 +155,17 @@
     .then(response => response.json())
     .then(data => {
         data.forEach(element => {
-        const li = document.createElement('li');
-        li.innerHTML = element['postText'];
-        resultList.append(li);
-        const id = document.createElement('li');
-        id.innerHTML = element['userID'];
-        resultID.append(id);
+        // const li = document.createElement('li');
+        // li.innerHTML = element['postText'];
+        // resultList.append(li);
+        // const id = document.createElement('li');
+        // id.innerHTML = element['userID'];
+        // resultID.append(id);
+
+        const li = document.createElement('table');
+          li.innerHTML = "<tr><td>" +element['userID']+ "</td><td>" +element['postText'] + "</td></tr>";
+          resultList.appendChild(li);
+
         });
 
       // resultList.innerHTML = resultList.textContent+"\n"+ postText;
